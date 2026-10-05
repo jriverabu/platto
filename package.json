@@ -1,0 +1,22 @@
+{
+  "name": "platto",
+  "private": true,
+  "description": "Platto: descubre restaurantes por sus platos en video de 10 segundos, reserva y califica.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm run test:core && npm run test:db",
+    "test:core": "tsx --test packages/core/test/*.test.ts",
+    "test:db": "bash scripts/test-db.sh",
+    "typecheck": "tsc -p packages/core/tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

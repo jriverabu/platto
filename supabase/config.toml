@@ -1,0 +1,30 @@
+# Configuración del proyecto para la CLI de Supabase.
+# `supabase start` levanta todo localmente; `supabase db push` aplica las migraciones al proyecto remoto.
+project_id = "platto"
+
+[api]
+schemas = ["public"]
+max_rows = 200
+
+[db]
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+site_url = "platto://"
+additional_redirect_urls = ["platto://auth-callback", "http://localhost:8081"]
+enable_signup = true
+
+[auth.email]
+enable_confirmations = true
+
+# Las funciones que reciben webhooks externos no llevan el JWT de Supabase:
+# cada una verifica la firma del proveedor.
+[functions.stream-webhook]
+verify_jwt = false
+
+[functions.payments-webhook]
+verify_jwt = false

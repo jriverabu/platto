@@ -1,0 +1,9 @@
+{
+  "name": "@platto/core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reglas del negocio de Platto compartidas por la app, el panel y las pruebas. Sin dependencias.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false
+}
