@@ -1,0 +1,13 @@
+// Cloudflare: publica la PWA (apps/web/dist) como sitio estático.
+// En el panel: Workers & Pages → Create → Import a repository → jriverabu/platto.
+//   Build command:  npm run build:web
+//   Deploy command: npx wrangler deploy
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "platto",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./apps/web/dist",
+    "not_found_handling": "single-page-application"
+  }
+}
