@@ -10,7 +10,9 @@
     "test": "npm run test:core && npm run test:db",
     "test:core": "tsx --test packages/core/test/*.test.ts",
     "test:db": "bash scripts/test-db.sh",
-    "typecheck": "tsc -p packages/core/tsconfig.json --noEmit"
+    "typecheck": "tsc -p packages/core/tsconfig.json --noEmit",
+    "build:web": "npm run build -w @platto/web",
+    "test:e2e": "npm run build:web && python3 apps/web/scripts/e2e.py"
   },
   "devDependencies": {
     "tsx": "^4.19.0",

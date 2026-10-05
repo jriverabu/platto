@@ -12,3 +12,4 @@ supabase/.temp/
 ios/
 android/
 coverage/
+apps/web/e2e-shots/

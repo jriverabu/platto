@@ -1,0 +1,18 @@
+{
+  "name": "@platto/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Platto como app web instalable (PWA): comensal, restaurante y administrador.",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs --watch",
+    "videos": "python3 scripts/make_demo_videos.py"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}
