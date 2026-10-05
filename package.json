@@ -3,7 +3,7 @@
   "private": true,
   "description": "Platto: descubre restaurantes por sus platos en video de 10 segundos, reserva y califica.",
   "workspaces": [
-    "apps/*",
+    "apps/web",
     "packages/*"
   ],
   "scripts": {

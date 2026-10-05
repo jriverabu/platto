@@ -1,0 +1,24 @@
+# Netlify: compila la PWA (apps/web) y publica su carpeta dist/.
+[build]
+  command = "npm install --no-audit --no-fund && npm run build:web"
+  publish = "apps/web/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# El service worker y el manifiesto no se guardan en caché, para que cada
+# despliegue llegue a los teléfonos que ya instalaron la app.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/videos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
