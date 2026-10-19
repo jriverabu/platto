@@ -15,6 +15,20 @@ Hoy corre en **modo demo**, con los mismos datos y reglas que la PWA (`packages/
 
 En **Perfil** y en **Cuenta** hay controles de la demo para pasar de un lado al otro, adelantar el reloj 2 horas (para poder calificar) y reiniciar.
 
+## Demo publicada (para socios)
+
+La app está publicada en Expo, en el proyecto `@jotadee-group/platto`, canal `demo`. Cualquiera la abre con Expo Go escaneando el código de [`docs/demo-app-qr.png`](../../docs/demo-app-qr.png) o con este enlace:
+
+```
+exp://u.expo.dev/d1c3f157-1b24-4c6f-92ce-07d36e520650?runtime-version=exposdk%3A58.0.0&channel-name=demo
+```
+
+Para publicar cambios (el mismo código QR muestra la versión nueva):
+
+```bash
+EXPO_TOKEN=<token del robot platto-claude> npx eas-cli@latest update --branch demo --environment preview --message "Qué cambió" --platform all --non-interactive
+```
+
 ## Probarla en tu teléfono (sin compilar nada)
 
 1. Instala **Expo Go** desde la App Store o Google Play.
