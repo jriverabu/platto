@@ -7,8 +7,4 @@ module.exports = ({ config }) => ({
     ...config.android,
     config: { googleMaps: { apiKey: process.env.GOOGLE_MAPS_ANDROID_KEY ?? '' } },
   },
-  extra: {
-    ...config.extra,
-    eas: { projectId: process.env.EAS_PROJECT_ID },
-  },
 });
