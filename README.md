@@ -12,7 +12,7 @@ Platto es un marketplace para Colombia (piloto en Cúcuta): los comensales ven c
 | Base de datos, permisos y lógica en Supabase | Listo, probado contra Postgres real | [`supabase/migrations`](supabase/migrations) |
 | Funciones del servidor: subida de video (límite 10 s), procesamiento, pagos, notificaciones | Listo, falta conectar cuentas | [`supabase/functions`](supabase/functions) |
 | App web instalable (PWA) en modo demo: comensal, restaurante y administrador | Lista, probada de punta a punta en navegador | [`apps/web`](apps/web) |
-| App iOS y Android (Expo SDK 58): comensal y restaurante en modo demo | Lista para probar con Expo Go; falta conectar Supabase y publicar en tiendas | [`apps/mobile`](apps/mobile) |
+| App iOS y Android (Expo SDK 57): comensal y restaurante en modo demo | Lista para probar con Expo Go; falta conectar Supabase y publicar en tiendas | [`apps/mobile`](apps/mobile) |
 | Guía para crear y conectar las cuentas | Lista | [`docs/CONFIGURACION.md`](docs/CONFIGURACION.md) |
 
 ## Cómo funciona

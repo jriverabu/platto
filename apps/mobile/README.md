@@ -1,6 +1,6 @@
 # Platto · App para iOS y Android
 
-Una sola app en **Expo SDK 58 (React Native 0.88, expo-router)** para iPhone y Android, con la identidad visual de Platto (fondo noche, naranja `#FF5A1F`, Poppins, logo de tenedor y plato con play).
+Una sola app en **Expo SDK 57 (React Native 0.86, expo-router)** para iPhone y Android, con la identidad visual de Platto (fondo noche, naranja `#FF5A1F`, Poppins, logo de tenedor y plato con play).
 
 Hoy corre en **modo demo**, con los mismos datos y reglas que la PWA (`packages/demo` y `packages/core`): cuatro restaurantes de Cúcuta, videos reales de Pexels y todo el flujo conectado. El siguiente paso es conectarla a Supabase; las pantallas no cambian.
 
@@ -17,10 +17,10 @@ En **Perfil** y en **Cuenta** hay controles de la demo para pasar de un lado al 
 
 ## Demo publicada (para socios)
 
-La app está publicada en Expo, en el proyecto `@jotadee-group/platto`, canal `demo`. Cualquiera la abre con Expo Go escaneando el código de [`docs/demo-app-qr.png`](../../docs/demo-app-qr.png) o con este enlace:
+La app está publicada en Expo, en el proyecto `@jotadee-group/platto`, canal `demo`. Se abre con Expo Go iniciando sesión con una cuenta de Expo que sea miembro de la organización Jotadee Group (las cuentas creadas con GitHub deben crear una contraseña en la configuración de usuario de expo.dev). Se abre escaneando el código de [`docs/demo-app-qr.png`](../../docs/demo-app-qr.png) o con este enlace:
 
 ```
-exp://u.expo.dev/d1c3f157-1b24-4c6f-92ce-07d36e520650?runtime-version=exposdk%3A58.0.0&channel-name=demo
+exp://u.expo.dev/d1c3f157-1b24-4c6f-92ce-07d36e520650?runtime-version=exposdk%3A57.0.0&channel-name=demo
 ```
 
 Para publicar cambios (el mismo código QR muestra la versión nueva):
@@ -55,6 +55,10 @@ eas submit --platform all                         # los envía a revisión
 ```
 
 Antes de compilar Android para la tienda, crea en Google Cloud una llave de **Maps SDK for Android** (no tiene costo por uso en apps móviles) y guárdala como variable de entorno `GOOGLE_MAPS_ANDROID_KEY` en expo.dev (Project → Environment variables). En Expo Go el mapa funciona sin ella.
+
+## Versión de Expo
+
+La app usa la SDK 57 porque es la que abre el Expo Go de las tiendas hoy. Expo lanzó la SDK 58 el 29 de septiembre de 2026, pero su Expo Go llega a las tiendas «en unas semanas». Cuando salga: `npx expo install expo@~58.0.0 --fix`, probar, publicar y actualizar el QR (cambia `runtime-version` en el enlace).
 
 ## Comandos
 
