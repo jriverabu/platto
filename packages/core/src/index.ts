@@ -8,3 +8,5 @@ export * from './reviews';
 export * from './subscriptions';
 export * from './video';
 export * from './brand';
+export * from './geo';
+export * from './promotions';

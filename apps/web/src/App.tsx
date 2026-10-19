@@ -19,6 +19,7 @@ import { MenuScreen } from './screens/restaurant/Menu';
 import { DishEditor } from './screens/restaurant/DishEditor';
 import { RestaurantReviews } from './screens/restaurant/Reviews';
 import { Account, Hours, PlanScreen } from './screens/restaurant/Account';
+import { Promotions } from './screens/restaurant/Promotions';
 import { AdminVideos, AdminRestaurants, AdminReviews } from './screens/admin/Admin';
 
 function Screen({ route }: { route: Route }) {
@@ -38,6 +39,7 @@ function Screen({ route }: { route: Route }) {
     case 'r-account': return <Account />;
     case 'r-hours': return <Hours />;
     case 'r-plan': return <PlanScreen />;
+    case 'r-promos': return <Promotions />;
     case 'a-videos': return <AdminVideos />;
     case 'a-restaurants': return <AdminRestaurants />;
     case 'a-reviews': return <AdminReviews />;

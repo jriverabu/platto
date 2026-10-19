@@ -37,6 +37,14 @@ export const RULES = {
 
   /** Días de gracia cuando falla un pago antes de ocultar el perfil. */
   subscriptionGraceDays: 7,
+
+  /** Promociones encendidas a la vez por restaurante (plan Pro). */
+  promoMaxActive: 3,
+  /** Caracteres del nombre y de las condiciones de una promoción. */
+  promoTitleMax: 40,
+  promoDetailMax: 140,
+  /** Duración máxima de una promoción, en días. */
+  promoMaxDays: 90,
 } as const;
 
 export type Rules = typeof RULES;

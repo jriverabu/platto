@@ -13,7 +13,9 @@ export function isMuted() {
 }
 export function onMutedChange(l: (m: boolean) => void) {
   muteListeners.add(l);
-  return () => muteListeners.delete(l);
+  return () => {
+    muteListeners.delete(l);
+  };
 }
 
 interface Props {

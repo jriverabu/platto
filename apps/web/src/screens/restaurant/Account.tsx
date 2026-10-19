@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PLANS, SUBSCRIPTION_LABEL, addCalendarDays, formatDateShort, localParts, type Plan } from '@platto/core';
-import { changePlan, now, setRule, toggleBlackout, useDemo } from '../../data/store';
+import { changePlan, livePromotions, now, setRule, toggleBlackout, useDemo } from '../../data/store';
 import { useNav } from '../../nav';
 import { Header, Icon, Perforation, Sheet, Switch, attempt, toast } from '../../components/ui';
 
@@ -27,6 +27,10 @@ export function Account() {
   const monthRes = s.reservations.filter((r) => r.restaurantId === rid && r.createdAt > t - MONTH);
   const answered = monthRes.filter((r) => r.respondedAt !== null).length;
   const decided = monthRes.filter((r) => r.status !== 'pending').length;
+  const liveCount = livePromotions(s, rid).length;
+  const promoSummary = !plan.promotions
+    ? 'Destaca ofertas en Inicio y en tu perfil'
+    : liveCount === 0 ? 'Ninguna se ve hoy' : `${liveCount} ${liveCount === 1 ? 'se ve' : 'se ven'} hoy en Inicio y en tu perfil`;
 
   return (
     <div className="screen">
@@ -77,11 +81,14 @@ export function Account() {
         </section>
 
         <div className="card list" style={{ padding: '0 14px' }}>
+          <button className="row gap-12" style={{ padding: '14px 0', border: 0, background: 'none', color: 'inherit', width: '100%', textAlign: 'left' }} onClick={() => nav.push({ name: 'r-promos' })}>
+            <Icon name="tag" /><span className="stack gap-4 grow"><span className="row gap-8 bold">Promociones{!plan.promotions && <span className="badge badge-brasa">Pro</span>}</span><span className="small muted">{promoSummary}</span></span><Icon name="chevron" size={18} />
+          </button>
           <button className="row gap-12" style={{ padding: '14px 0', border: 0, background: 'none', color: 'inherit', width: '100%', textAlign: 'left' }} onClick={() => nav.push({ name: 'r-hours' })}>
             <Icon name="clock" /><span className="stack gap-4 grow"><span className="bold">Horarios y cupos</span><span className="small muted">Franjas, personas por franja y días cerrados</span></span><Icon name="chevron" size={18} />
           </button>
           <div className="row gap-12" style={{ padding: '14px 0' }}>
-            <Icon name="pin" /><span className="stack gap-4 grow"><span className="bold">{rest.address}</span><span className="small muted">{rest.zone} · Bogotá</span></span>
+            <Icon name="pin" /><span className="stack gap-4 grow"><span className="bold">{rest.address}</span><span className="small muted">{rest.zone} · Cúcuta</span></span>
           </div>
         </div>
       </div>

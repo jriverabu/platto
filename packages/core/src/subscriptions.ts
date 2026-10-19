@@ -30,6 +30,8 @@ export interface PlanInfo {
   maxDishes: number | null;
   featured: boolean;
   analytics: boolean;
+  /** Puede crear promociones. */
+  promotions: boolean;
   features: string[];
 }
 
@@ -44,6 +46,7 @@ export const PLANS: Record<Plan, PlanInfo> = {
     maxDishes: 30,
     featured: false,
     analytics: false,
+    promotions: false,
     features: ['Perfil y menú en video', 'Hasta 30 platos', 'Reservas ilimitadas', 'Calificaciones verificadas'],
   },
   pro: {
@@ -52,9 +55,11 @@ export const PLANS: Record<Plan, PlanInfo> = {
     maxDishes: null,
     featured: true,
     analytics: true,
+    promotions: true,
     features: [
       'Platos ilimitados con video',
-      'Posición destacada en Descubrir',
+      'Posición destacada en Inicio',
+      'Promociones en Inicio y en tu perfil',
       'Vistas por plato y reservas por mes',
       'Grabación profesional cada trimestre',
     ],

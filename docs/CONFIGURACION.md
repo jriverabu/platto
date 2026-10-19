@@ -91,6 +91,13 @@ El vencimiento de solicitudes sin respuesta ya queda programado por la migració
 1. Crea una cuenta en expo.dev y un token de acceso; guárdalo como `EXPO_ACCESS_TOKEN` en los secretos de Supabase.
 2. Con la app construida: `eas build` genera los binarios y `eas submit` los envía a las tiendas.
 
-## 8. Habilitar npm en Claude
+## 8. npm en el entorno de Claude
 
-Para que Claude construya la app móvil necesita descargar paquetes de npm. En claude.ai ve a **Configuración → Capacidades** y activa **Permitir salida de red** (*Allow network egress*) dentro de *Ejecución de código y creación de archivos*. En planes Team o Enterprise lo hace el dueño de la organización en *Configuración de la organización → Capacidades*.
+Ya funciona. El entorno en la nube enruta npm por fuera del proxy de salida; con estas variables pasa por el proxy y descarga sin problema:
+
+```bash
+export npm_config_noproxy=localhost,127.0.0.1 NO_PROXY=localhost,127.0.0.1 no_proxy=localhost,127.0.0.1
+npm install
+```
+
+Otros dominios (por ejemplo bancos de video como Pexels) se habilitan en claude.ai, en **Configuración → Capacidades** (en planes Team o Enterprise, el administrador en *Configuración de la organización → Capacidades*). En tu computador no hace falta nada de esto: `npm install` funciona normal.

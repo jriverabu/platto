@@ -4,7 +4,7 @@ import { addCalendarDays, localParts, zonedToUtc, type AvailabilityRule } from '
 import type { DemoState, DishRow, ReservationRow, ReviewRow, ViewRow } from './model';
 
 export const TZ = 'America/Bogota';
-export const DEMO_VERSION = 4;
+export const DEMO_VERSION = 5;
 
 const MIN = 60_000;
 
@@ -43,22 +43,22 @@ export function buildSeed(nowMs: number): DemoState {
   const restaurants: DemoState['restaurants'] = [
     {
       id: 'r-brasa', slug: 'brasa-negra', name: 'Brasa Negra', cuisine: 'Parrilla', zone: 'Caobos',
-      address: 'Av. 0 # 15-42', priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
+      address: 'Av. 0 # 15-42', lat: 7.8986, lng: -72.496, priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Carnes al carbón y leña de naranjo, con salsas de la casa.', coverDishId: 'd-costilla',
     },
     {
       id: 'r-fogon', slug: 'fogon-cucuteno', name: 'Fogón Cucuteño', cuisine: 'Típica', zone: 'Centro',
-      address: 'Calle 10 # 4-58', priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
+      address: 'Calle 10 # 4-58', lat: 7.8833, lng: -72.505, priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Mute, sobrebarriga y arepas como en la casa de la abuela.', coverDishId: 'd-mute',
     },
     {
       id: 'r-corvina', slug: 'casa-corvina', name: 'Casa Corvina', cuisine: 'Mariscos', zone: 'Quinta Oriental',
-      address: 'Av. 5 # 14-21', priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
+      address: 'Av. 5 # 14-21', lat: 7.889, lng: -72.492, priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Ceviches y pesca del día del Pacífico colombiano.', coverDishId: 'd-ceviche',
     },
     {
       id: 'r-verde', slug: 'verde-raiz', name: 'Verde Raíz', cuisine: 'Vegetariana', zone: 'La Ceiba',
-      address: 'Calle 2N # 8-17', priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
+      address: 'Calle 2N # 8-17', lat: 7.8962, lng: -72.4868, priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Cocina de huerta sabanera, sin carne y sin aburrir.', coverDishId: 'd-bowl',
     },
   ];
@@ -217,6 +217,11 @@ export function buildSeed(nowMs: number): DemoState {
     dishes,
     rules,
     blackouts: [],
+    // Brasa Negra tiene plan Pro: sus promociones se ven en Inicio, Explorar y su perfil.
+    promotions: [
+      { id: 'p-chorizo', restaurantId: 'r-brasa', title: '2x1 en chorizo santarrosano', detail: 'De lunes a jueves. No acumulable con otras promociones.', weekdays: [1, 2, 3, 4], startsOn: today, endsOn: addCalendarDays(today, 45), active: true },
+      { id: 'p-postre', restaurantId: 'r-brasa', title: 'Postre gratis en mesas de 4', detail: 'Reservando por Platto. Un postre de la casa por mesa.', weekdays: [], startsOn: today, endsOn: addCalendarDays(today, 30), active: true },
+    ],
     reservations,
     reviews,
     views,

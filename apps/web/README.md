@@ -2,8 +2,8 @@
 
 Platto como app web instalable: se abre con un link o un QR y se agrega a la pantalla de inicio del teléfono. Incluye los tres lados del producto conectados entre sí:
 
-- **Comensal:** feed de platos en video de 10 s, búsqueda por zona, cocina y precio, perfil del restaurante, reserva con franjas y cupo reales, mis reservas, calificación verificada.
-- **Restaurante:** bandeja de solicitudes con cuenta regresiva, agenda del día (llegó / no llegó), menú con subida y recorte de video a 10 s, reseñas con respuesta, horarios y cupos, plan y estadísticas.
+- **Comensal:** feed de platos en video de 10 s, búsqueda por zona, cocina, precio y promoción, «Cerca de mí» en lista o mapa, perfil del restaurante, reserva con franjas y cupo reales, mis reservas, calificación verificada.
+- **Restaurante:** bandeja de solicitudes con cuenta regresiva, agenda del día (llegó / no llegó), menú con subida y recorte de video a 10 s, reseñas con respuesta, horarios y cupos, promociones (plan Pro), plan y estadísticas.
 - **Administrador:** aprobación de videos, estado de restaurantes y suscripciones, moderación de reseñas.
 
 La identidad visual sigue el rediseño de octubre de 2026: logo de tenedor y plato con play, lema «Ve. Elige. Disfruta.», fondo noche y acento naranja. Los datos de ejemplo están en Cúcuta.
@@ -16,9 +16,16 @@ Hoy corre en **modo demo**: los datos viven en el navegador (`src/data/store.ts`
 npm install
 npm run build        # genera dist/
 npm run dev          # compila al guardar y sirve en http://localhost:5173
-npm run videos       # regenera los videos de demostración (Python + Playwright + ffmpeg)
+npm run videos       # regenera los videos ilustrados de demostración (Python + Playwright + ffmpeg)
+python3 scripts/import_stock_videos.py <carpeta>   # cambia las ilustraciones por clips reales de uso libre
 python3 scripts/e2e.py   # recorrido completo en Chromium con capturas
 ```
+
+## Mapa
+
+«Cerca de mí» usa [MapLibre](https://maplibre.org) con los mapas de [OpenFreeMap](https://openfreemap.org): gratis, sin llave ni límite de vistas y con uso comercial permitido (piden mantener el crédito a OpenStreetMap, que MapLibre muestra solo). MapLibre se descarga aparte (`dist/chunks/`) solo cuando alguien abre el mapa. Sin conexión, la app muestra un plano simple con los mismos puntos.
+
+La ubicación del teléfono se pide solo al tocar «Cerca de mí», se usa en el teléfono para ordenar y no se guarda.
 
 ## Publicar
 

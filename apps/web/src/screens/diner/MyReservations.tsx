@@ -44,7 +44,7 @@ export function MyReservations() {
 
         <div className="stack gap-10">
           <span className="label">Próximas</span>
-          {upcoming.length === 0 && <Empty title="Sin reservas" body="Encuentra un plato en Inicio y reserva desde ahí." action={<button className="btn btn-light" onClick={() => nav.switchTab('feed')}>Descubrir</button>} />}
+          {upcoming.length === 0 && <Empty title="Sin reservas" body="Encuentra un plato en Inicio y reserva desde ahí." action={<button className="btn btn-light" onClick={() => nav.switchTab('feed')}>Ir a Inicio</button>} />}
           {upcoming.map((r) => <ReservationCard key={r.id} r={r} onOpen={() => nav.push({ name: 'reservation', id: r.id })} />)}
         </div>
 

@@ -18,10 +18,15 @@ import {
   summarizeRatings,
   validateNewReservation,
   validateReviewInput,
+  canUsePromotions,
+  countsTowardPromoLimit,
+  isPromotionLive,
+  validatePromotion,
   type Plan,
+  type PromotionInput,
   type Slot,
 } from '@platto/core';
-import { AppError, type DemoState, type DishRow, type ReservationRow, type ReviewRow, type Role, type VideoFile } from './model';
+import { AppError, type DemoState, type DishRow, type PromotionRow, type ReservationRow, type ReviewRow, type Role, type VideoFile } from './model';
 import { DEMO_VERSION, TZ, buildSeed } from './seed';
 
 const STORAGE_KEY = 'platto-demo';
@@ -157,6 +162,20 @@ export function ratingOf(s: DemoState, restaurantId: string) {
 
 export function featured(s: DemoState, restaurantId: string) {
   return s.subscriptions.find((x) => x.restaurantId === restaurantId)?.plan === 'pro';
+}
+
+export function planOf(s: DemoState, restaurantId: string): Plan | null {
+  return s.subscriptions.find((x) => x.restaurantId === restaurantId)?.plan ?? null;
+}
+
+/** Promociones que se muestran hoy (plan Pro, encendidas, en fechas y en su día). */
+export function livePromotions(s: DemoState, restaurantId?: string): PromotionRow[] {
+  const t = new Date(now());
+  return s.promotions.filter((p) => {
+    if (restaurantId && p.restaurantId !== restaurantId) return false;
+    const r = s.restaurants.find((x) => x.id === p.restaurantId);
+    return Boolean(r) && isRestaurantListed(s, p.restaurantId) && isPromotionLive(p, planOf(s, p.restaurantId), t, r!.timezone);
+  });
 }
 
 export interface FeedItem {
@@ -493,6 +512,49 @@ export function changePlan(restaurantId: string, plan: Plan) {
       `Tu plan ahora es ${plan === 'pro' ? 'Pro' : 'Esencial'}.`,
     ),
   );
+}
+
+// ---------------------------------------------------------------------------
+// Promociones (plan Pro). En producción: tabla promotions con su trigger de reglas.
+// ---------------------------------------------------------------------------
+function restaurantToday(d: DemoState, restaurantId: string) {
+  const r = d.restaurants.find((x) => x.id === restaurantId)!;
+  return localParts(new Date(now()), r.timezone).date;
+}
+
+function assertPromoLimit(d: DemoState, restaurantId: string, today: string, exceptId: string | null) {
+  const active = d.promotions.filter((p) => p.restaurantId === restaurantId && p.id !== exceptId && countsTowardPromoLimit(p, today)).length;
+  if (active >= RULES.promoMaxActive) fail('PROMO_LIMIT', `Puedes tener hasta ${RULES.promoMaxActive} promociones encendidas. Apaga una para encender otra.`);
+}
+
+export function savePromotion(restaurantId: string, input: PromotionInput & { id?: string }): string {
+  const d = state;
+  const plan = planOf(d, restaurantId);
+  if (!plan || !canUsePromotions(plan)) fail('PROMO_PLAN_REQUIRED', 'Las promociones vienen con el plan Pro.');
+  const today = restaurantToday(d, restaurantId);
+  const checked = validatePromotion(input, today);
+  if (!checked.ok) fail(checked.error.code, checked.error.message);
+  const existing = input.id ? d.promotions.find((p) => p.id === input.id && p.restaurantId === restaurantId) : undefined;
+  if (!existing || existing.active) assertPromoLimit(d, restaurantId, today, existing?.id ?? null);
+  const id = existing?.id ?? newId('p');
+  const row: PromotionRow = { id, restaurantId, active: existing?.active ?? true, ...checked.value };
+  set((x) => ({ ...x, promotions: existing ? x.promotions.map((p) => (p.id === id ? row : p)) : [row, ...x.promotions] }));
+  return id;
+}
+
+export function setPromotionActive(id: string, active: boolean) {
+  const p = state.promotions.find((x) => x.id === id);
+  if (!p) fail('NOT_FOUND', 'No encontramos esa promoción.');
+  if (active) {
+    const today = restaurantToday(state, p.restaurantId);
+    if (p.endsOn < today) fail('PROMO_ENDED', 'Esta promoción ya terminó. Edítala con una fecha nueva.');
+    assertPromoLimit(state, p.restaurantId, today, p.id);
+  }
+  set((x) => ({ ...x, promotions: x.promotions.map((q) => (q.id === id ? { ...q, active } : q)) }));
+}
+
+export function deletePromotion(id: string) {
+  set((x) => ({ ...x, promotions: x.promotions.filter((p) => p.id !== id) }));
 }
 
 // ---------------------------------------------------------------------------

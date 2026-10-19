@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { formatCop, formatRating } from '@platto/core';
-import { logView, ratingOf, selectFeed, toggleSaved, useDemo, type FeedItem } from '../../data/store';
+import { livePromotions, logView, ratingOf, selectFeed, toggleSaved, useDemo, type FeedItem } from '../../data/store';
 import { useNav } from '../../nav';
 import { DishVideo, isMuted, onMutedChange, setMuted } from '../../components/Video';
 import { Icon, toast } from '../../components/ui';
@@ -55,6 +55,7 @@ export function Feed() {
           onZone={setZone}
           saved={s.saved.includes(item.dish.id)}
           rating={ratingOf(s, item.restaurant.id)}
+          promo={livePromotions(s, item.restaurant.id)[0]?.title ?? null}
         />
       ))}
     </div>
@@ -62,7 +63,7 @@ export function Feed() {
 }
 
 function FeedCard({
-  item, index, active, zone, zones, onZone, saved, rating,
+  item, index, active, zone, zones, onZone, saved, rating, promo,
 }: {
   item: FeedItem;
   index: number;
@@ -72,6 +73,8 @@ function FeedCard({
   onZone: (z: string | null) => void;
   saved: boolean;
   rating: ReturnType<typeof ratingOf>;
+  /** Promoción de hoy del restaurante, si tiene. */
+  promo: string | null;
 }) {
   const nav = useNav();
   const segs = useRef<(HTMLElement | null)[]>([]);
@@ -155,6 +158,11 @@ function FeedCard({
       </div>
 
       <div className="feed-info">
+        {promo && (
+          <button className="promo-pill" style={{ border: 0 }} onClick={() => nav.push({ name: 'restaurant', id: item.restaurant.id })}>
+            <Icon name="tag" size={14} stroke={2.4} /><span className="ellipsis">{promo}</span>
+          </button>
+        )}
         <h2 className="dish">{item.dish.name}</h2>
         <div className="row gap-8">
           <span className="avatar" aria-hidden="true">{initials(item.restaurant.name)}</span>

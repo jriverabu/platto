@@ -19,6 +19,11 @@ Cada regla vive en dos lugares que deben coincidir: `packages/core/src/rules.ts`
 | Respuesta del restaurante | una por reseña, hasta 500 caracteres | — | `public.reply_review()` |
 | Gracia por pago fallido | 7 días | `subscriptionGraceDays` | `private.restaurant_is_listed()`, `payments-webhook` |
 | Platos del plan Esencial | 30 | `PLANS.esencial.maxDishes` | `plans.max_dishes` + trigger `dishes_guard` |
+| Promociones | solo plan Pro | `PLANS.pro.promotions` | `plans.promotions` + trigger `promotions_guard` |
+| Promociones encendidas a la vez | 3 | `promoMaxActive` | `private.promo_max_active()` |
+| Nombre / condiciones de una promoción | 40 / 140 caracteres | `promoTitleMax`, `promoDetailMax` | `check` en `promotions` |
+| Duración de una promoción | hasta 90 días | `promoMaxDays` | `check` `promotions_max_days` |
+| «Cerca de mí» | desde la ubicación del teléfono si está a menos de 25 km de Cúcuta; si no, desde el Parque Santander | `CITY` en `geo.ts` | — (se calcula en el teléfono) |
 
 ## Garantías que da la base de datos
 
@@ -26,4 +31,5 @@ Cada regla vive en dos lugares que deben coincidir: `packages/core/src/rules.ts`
 - **Ningún video de más de 10 segundos se publica.** Lo impiden Cloudflare al subir, el webhook al procesar y un `check` en la tabla.
 - **Un restaurante no puede publicar un video sin revisión,** ni cambiar su estado, ni editar o borrar reseñas.
 - **Solo califica quien fue,** y el nombre visible se guarda abreviado ("Camila R.").
+- **Las promociones solo se ven con plan Pro.** Si el restaurante baja a Esencial, se ocultan solas y vuelven si regresa a Pro.
 - **Un restaurante con pago vencido desaparece** del feed y de las búsquedas después de la gracia, sin perder su menú ni sus videos.

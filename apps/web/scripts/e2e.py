@@ -48,7 +48,12 @@ def main() -> None:
     errors: list[str] = []
     with sync_playwright() as p:
         browser = p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"])
-        page = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True)
+        # Ubicación simulada en Cúcuta (cerca de La Ceiba) para «Cerca de mí».
+        context = browser.new_context(
+            viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True, has_touch=True,
+            geolocation={"latitude": 7.8975, "longitude": -72.4855}, permissions=["geolocation"],
+        )
+        page = context.new_page()
         page.on("console", lambda m: errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         shot = lambda name: page.screenshot(path=str(SHOTS / f"{name}.png"))  # noqa: E731
@@ -60,10 +65,12 @@ def main() -> None:
         page.get_by_role("button", name="Explorar la demo").click()
         page.wait_for_timeout(2500)
         shot("02-descubrir")
+        assert page.locator(".promo-pill").count() > 0, "Inicio muestra la promoción de Brasa Negra"
 
         # Comensal: ver el menú del primer plato y reservar.
         page.get_by_role("button", name="Ver menú").first.click()
         page.wait_for_timeout(1200)
+        expect(page.get_by_text("Postre gratis en mesas de 4")).to_be_visible()
         shot("03-restaurante")
         page.locator(".screen").first.evaluate("el => el.scrollTo(0, 900)")
         page.wait_for_timeout(400)
@@ -138,10 +145,51 @@ def main() -> None:
         page.wait_for_timeout(500)
         shot("17-buscar")
 
+        # Cerca de mí: ordena por distancia desde la ubicación del teléfono.
+        page.get_by_role("button", name="Cerca de mí").click()
+        expect(page.get_by_text("Distancias desde donde estás.")).to_be_visible()
+        first = page.locator(".card").first.inner_text()
+        assert "Verde Raíz" in first, f"el más cercano debería ser Verde Raíz: {first}"
+        shot("18-cerca-de-mi")
+        page.get_by_role("button", name="Con promoción").click()
+        expect(page.locator(".card")).to_have_count(1)
+        page.get_by_role("button", name="Con promoción").click()
+
+        # Mapa: sin internet en este entorno se ve el plano simple con los mismos puntos.
+        page.get_by_role("button", name="Mapa", exact=True).click()
+        page.wait_for_selector(".map-pin", timeout=15000)
+        page.locator(".map-pin", has_text="BN").first.click()
+        page.wait_for_timeout(400)
+        expect(page.locator(".card", has_text="Brasa Negra")).to_be_visible()
+        page.locator(".screen").first.evaluate("el => el.scrollTo(0, 260)")
+        shot("19-mapa")
+
+        # Restaurante (plan Pro): crea una promoción y la ve publicada.
+        page.get_by_role("button", name="Abrir controles de la demo").click()
+        page.get_by_role("button", name="Restaurante Brasa Negra").click()
+        page.get_by_role("button", name="Cuenta").click()
+        page.get_by_role("button", name="Promociones").click()
+        page.get_by_role("button", name="Nueva promoción").click()
+        page.get_by_label("Nombre").fill("Limonada de coco gratis")
+        page.get_by_label("Condiciones").fill("Con cualquier plato fuerte, en el almuerzo.")
+        page.wait_for_timeout(500)
+        shot("20-nueva-promocion")
+        page.get_by_role("button", name="Publicar promoción").click()
+        expect(page.get_by_text("Promoción publicada")).to_be_visible()
+        # Ya hay 3 encendidas: una cuarta no se puede publicar.
+        page.get_by_role("button", name="Nueva promoción").click()
+        page.get_by_label("Nombre").fill("Cuarta promo")
+        page.get_by_role("button", name="Publicar promoción").click()
+        expect(page.get_by_text("Puedes tener hasta 3 promociones encendidas", exact=False)).to_be_visible()
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(300)
+        shot("21-promociones")
+
         browser.close()
 
     # Las fuentes de Google no cargan en entornos sin internet; no es un error de la app.
-    real = [e for e in errors if "favicon" not in e and "ERR_TUNNEL_CONNECTION_FAILED" not in e]
+    # Tampoco los mapas de OpenFreeMap: el entorno de pruebas no tiene salida a internet.
+    real = [e for e in errors if "favicon" not in e and "ERR_TUNNEL_CONNECTION_FAILED" not in e and "Failed to load resource: net::ERR_" not in e]
     if real:
         print("ERRORES EN EL NAVEGADOR:")
         print("\n".join(real))

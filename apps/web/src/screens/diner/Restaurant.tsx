@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
 import { formatClock12, formatCop, formatPriceLevel, formatRating, localParts } from '@platto/core';
-import { featured, now, ratingOf, reportReview, slotsFor, useDemo } from '../../data/store';
+import { featured, livePromotions, now, ratingOf, reportReview, slotsFor, useDemo } from '../../data/store';
 import type { DishRow } from '../../data/model';
 import { useNav } from '../../nav';
 import { DishVideo } from '../../components/Video';
 import { Icon, Sheet, Stars, attempt } from '../../components/ui';
 import { initials } from './Feed';
+import { PromoCard } from '../../components/Promo';
 
 type Tab = 'menu' | 'reviews' | 'info';
 const WEEKDAYS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -33,6 +34,7 @@ export function RestaurantScreen({ id }: { id: string }) {
   const today = localParts(new Date(now()), restaurant.timezone).date;
   const next = slotsFor(s, id, today, 2).find((x) => x.available);
   const rules = s.rules.filter((r) => r.restaurantId === id);
+  const promos = livePromotions(s, id);
 
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -67,6 +69,12 @@ export function RestaurantScreen({ id }: { id: string }) {
         <button className="btn btn-primary btn-block" disabled={!restaurant.reservationsEnabled} onClick={() => nav.push({ name: 'reserve', restaurantId: id })}>
           <Icon name="calendar" size={18} /> {restaurant.reservationsEnabled ? 'Reservar mesa' : 'No recibe reservas por ahora'}
         </button>
+
+        {promos.length > 0 && (
+          <div className="stack gap-8" aria-label="Promociones de hoy">
+            {promos.map((p) => <PromoCard key={p.id} p={p} timeZone={restaurant.timezone} />)}
+          </div>
+        )}
 
         <div className="tabs-line" role="tablist" aria-label="Secciones del restaurante">
           {([['menu', 'Menú en video'], ['reviews', 'Opiniones'], ['info', 'Información']] as const).map(([k, label]) => (

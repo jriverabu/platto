@@ -42,6 +42,10 @@ const PATHS: Record<string, ReactNode> = {
   flame: <path d="M12 3c1 3 5 5.5 5 10a5 5 0 0 1-10 0c0-2.2 1-3.6 2.2-4.8C9.5 10 10.5 11 11 12c.6-3 1-6 1-9z" />,
   bowl: <><path d="M3 11h18a9 9 0 0 1-18 0z" /><path d="M8 7c0-1.5 1.5-1.5 1.5-3" /><path d="M12.5 7c0-1.5 1.5-1.5 1.5-3" /></>,
   fish: <><path d="M3 12c3-4.5 9-6 14-2l4-3v10l-4-3c-5 4-11 2.5-14-2z" /><circle cx="14.5" cy="11" r=".8" fill="currentColor" /></>,
+  locate: <><circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="2.5" fill="currentColor" /><path d="M12 2v3" /><path d="M12 19v3" /><path d="M2 12h3" /><path d="M19 12h3" /></>,
+  tag: <><path d="M3 12V4h8l10 10-8 8z" /><circle cx="7.5" cy="8.5" r="1.5" fill="currentColor" /></>,
+  map: <><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z" /><path d="M9 4v14" /><path d="M15 6v14" /></>,
+  list: <><path d="M9 6h11" /><path d="M9 12h11" /><path d="M9 18h11" /><circle cx="4.5" cy="6" r="1" fill="currentColor" /><circle cx="4.5" cy="12" r="1" fill="currentColor" /><circle cx="4.5" cy="18" r="1" fill="currentColor" /></>,
   leaf: <><path d="M5 19C5 10 10 5 20 4c-.5 9-5 15-13 15z" /><path d="M5 19l8-8" /></>,
 };
 

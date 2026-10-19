@@ -6,6 +6,7 @@ import { build, context } from 'esbuild';
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const dist = resolve(here, 'dist');
@@ -15,6 +16,11 @@ const version = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 12);
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
 cpSync(resolve(here, 'public'), dist, { recursive: true });
+
+// Hoja de estilos de MapLibre: se carga solo cuando se abre el mapa.
+const require = createRequire(import.meta.url);
+mkdirSync(resolve(dist, 'vendor'), { recursive: true });
+cpSync(resolve(dirname(require.resolve('maplibre-gl/package.json')), 'dist/maplibre-gl.css'), resolve(dist, 'vendor/maplibre-gl.css'));
 
 // Variante para publicar como Artifact de Claude: sin <html>/<head> (el visor pone el esqueleto).
 writeFileSync(
@@ -38,6 +44,9 @@ const options = {
   bundle: true,
   outdir: dist,
   format: 'esm',
+  // El mapa (MapLibre) va en un archivo aparte que se descarga solo al abrirlo.
+  splitting: true,
+  chunkNames: 'chunks/[name]-[hash]',
   target: ['es2020', 'safari15'],
   jsx: 'automatic',
   minify: !watch,

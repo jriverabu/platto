@@ -1,6 +1,6 @@
 // Modelo de datos de la app. Refleja las tablas de supabase/migrations;
 // las fechas se guardan como milisegundos para poder persistir el estado de la demo.
-import type { AvailabilityRule, Plan, ReservationStatus, SubscriptionStatus, VideoStatus } from '@platto/core';
+import type { AvailabilityRule, Plan, Promotion, ReservationStatus, SubscriptionStatus, VideoStatus } from '@platto/core';
 
 export type Role = 'diner' | 'restaurant' | 'admin';
 
@@ -17,6 +17,8 @@ export interface RestaurantRow {
   cuisine: string;
   zone: string;
   address: string;
+  lat: number;
+  lng: number;
   priceLevel: 1 | 2 | 3 | 4;
   description: string;
   timezone: string;
@@ -64,6 +66,9 @@ export interface DishRow {
   videoStatus: VideoStatus;
   reviewNote: string | null;
 }
+
+/** Promoción creada por el restaurante (plan Pro). Ver packages/core/src/promotions.ts. */
+export type PromotionRow = Promotion;
 
 export interface ReservationRow {
   id: string;
@@ -125,6 +130,7 @@ export interface DemoState {
   dishes: DishRow[];
   rules: AvailabilityRule[];
   blackouts: { restaurantId: string; day: string }[];
+  promotions: PromotionRow[];
   reservations: ReservationRow[];
   reviews: ReviewRow[];
   views: ViewRow[];

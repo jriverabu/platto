@@ -56,3 +56,10 @@ cross join lateral (values
   ('19:00'::time, '22:00'::time, r.base_capacity / 2, d.weekday between 2 and 6)
 ) as s(start_time, end_time, capacity, applies)
 where s.applies;
+
+-- Promociones de Brasa Negra (plan Pro).
+insert into public.promotions (restaurant_id, title, detail, weekdays, starts_on, ends_on) values
+  ('11111111-1111-4111-8111-111111111111', '2x1 en chorizo santarrosano', 'Martes y miércoles en la cena. No acumulable.', '{2,3}',
+   (now() at time zone 'America/Bogota')::date, (now() at time zone 'America/Bogota')::date + 45),
+  ('11111111-1111-4111-8111-111111111111', 'Postre gratis en mesas de 4', 'Reservando por Platto, de lunes a jueves.', '{1,2,3,4}',
+   (now() at time zone 'America/Bogota')::date, (now() at time zone 'America/Bogota')::date + 30);

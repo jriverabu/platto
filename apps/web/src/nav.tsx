@@ -21,6 +21,7 @@ export type Route =
   | { name: 'r-account' }
   | { name: 'r-hours' }
   | { name: 'r-plan' }
+  | { name: 'r-promos' }
   // Administrador
   | { name: 'a-videos' }
   | { name: 'a-restaurants' }
