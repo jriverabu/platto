@@ -8,9 +8,23 @@
     "noEmit": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "baseUrl": ".",
-    "paths": { "@platto/core": ["../../packages/core/src/index.ts"] }
+    "paths": {
+      "@platto/core": [
+        "../../packages/core/src/index.ts"
+      ],
+      "@platto/demo": [
+        "../../packages/demo/src/index.ts"
+      ]
+    }
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "../../packages/demo/src"
+  ]
 }

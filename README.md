@@ -12,7 +12,7 @@ Platto es un marketplace para Colombia (piloto en Cúcuta): los comensales ven c
 | Base de datos, permisos y lógica en Supabase | Listo, probado contra Postgres real | [`supabase/migrations`](supabase/migrations) |
 | Funciones del servidor: subida de video (límite 10 s), procesamiento, pagos, notificaciones | Listo, falta conectar cuentas | [`supabase/functions`](supabase/functions) |
 | App web instalable (PWA) en modo demo: comensal, restaurante y administrador | Lista, probada de punta a punta en navegador | [`apps/web`](apps/web) |
-| App iOS y Android (Expo) | Pendiente: requiere acceso a npm | [`apps/mobile`](apps/mobile) |
+| App iOS y Android (Expo SDK 58): comensal y restaurante en modo demo | Lista para probar con Expo Go; falta conectar Supabase y publicar en tiendas | [`apps/mobile`](apps/mobile) |
 | Guía para crear y conectar las cuentas | Lista | [`docs/CONFIGURACION.md`](docs/CONFIGURACION.md) |
 
 ## Cómo funciona
@@ -35,8 +35,9 @@ Detalle técnico en [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md). Todas las ci
 
 ```
 apps/web/             PWA: la app completa en el navegador, instalable
-apps/mobile/          App Expo (iOS y Android) — próxima fase
+apps/mobile/          App Expo (iOS y Android)
 packages/core/        Reglas del negocio y marca, sin dependencias, compartidas por todo
+packages/demo/        Datos de ejemplo y backend de demostración, compartidos por la web y la app
 supabase/
   migrations/         Esquema, seguridad (RLS) y funciones de negocio
   functions/          Edge Functions (Deno): video, pagos, notificaciones
@@ -65,7 +66,7 @@ supabase db reset     # aplica migraciones y datos de ejemplo
 
 ## Siguiente paso
 
-Construir la app en `apps/mobile` sobre este backend. Ver [`apps/mobile/README.md`](apps/mobile/README.md).
+Conectar la app de `apps/mobile` y la PWA a este backend (hoy corren en modo demo). Ver [`apps/mobile/README.md`](apps/mobile/README.md).
 
 ---
 

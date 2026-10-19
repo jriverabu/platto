@@ -1,0 +1,12 @@
+{
+  "name": "@platto/demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Backend de demostración de Platto: datos de ejemplo en Cúcuta y las mismas reglas que la base de datos, en memoria.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": true,
+  "peerDependencies": {
+    "react": ">=19"
+  }
+}

@@ -88,8 +88,9 @@ El vencimiento de solicitudes sin respuesta ya queda programado por la migració
 
 ## 7. Expo (compilar y publicar la app)
 
-1. Crea una cuenta en expo.dev y un token de acceso; guárdalo como `EXPO_ACCESS_TOKEN` en los secretos de Supabase.
-2. Con la app construida: `eas build` genera los binarios y `eas submit` los envía a las tiendas.
+1. Crea una cuenta en expo.dev y un token de acceso; guárdalo como `EXPO_ACCESS_TOKEN` en los secretos de Supabase (para las notificaciones).
+2. Para probar sin compilar: Expo Go en el teléfono y `npx expo start` en `apps/mobile` (detalles en `apps/mobile/README.md`).
+3. Para las tiendas: `eas init`, `eas build` genera los binarios y `eas submit` los envía. En Android agrega la variable `GOOGLE_MAPS_ANDROID_KEY` (llave gratuita de Maps SDK for Android) en expo.dev.
 
 ## 8. npm en el entorno de Claude
 

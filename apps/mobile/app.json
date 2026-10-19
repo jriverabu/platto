@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "Platto",
+    "slug": "platto",
+    "scheme": "platto",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0E0E10",
+    "primaryColor": "#FF5A1F",
+    "description": "Descubre restaurantes por sus platos en video de 10 segundos, reserva y califica.",
+    "ios": {
+      "bundleIdentifier": "co.platto.app",
+      "supportsTablet": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "co.platto.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0E0E10"
+      }
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-video",
+      "expo-font",
+      "expo-sqlite",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#0E0E10"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Platto usa tu ubicación solo para mostrarte los restaurantes más cerca de ti. No la guarda."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Platto necesita tus videos para subir el de cada plato de tu menú.",
+          "cameraPermission": "Platto usa la cámara para grabar el video de tus platos.",
+          "microphonePermission": false
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}

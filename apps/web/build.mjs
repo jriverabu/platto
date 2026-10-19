@@ -53,7 +53,10 @@ const options = {
   sourcemap: watch,
   legalComments: 'none',
   define: { 'process.env.NODE_ENV': JSON.stringify(watch ? 'development' : 'production') },
-  alias: { '@platto/core': resolve(here, '../../packages/core/src/index.ts') },
+  alias: {
+    '@platto/core': resolve(here, '../../packages/core/src/index.ts'),
+    '@platto/demo': resolve(here, '../../packages/demo/src/index.ts'),
+  },
   // Permite compilar con React instalado fuera del proyecto (NODE_PATH).
   nodePaths: (process.env.NODE_PATH ?? '').split(':').filter(Boolean),
   loader: { '.svg': 'text' },
