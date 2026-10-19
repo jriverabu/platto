@@ -31,6 +31,7 @@ interface Props {
 
 // Tipos mínimos de MapLibre que usamos (el paquete trae los suyos, pero así el resto compila sin cargarlo).
 interface MlMarker {
+  getElement(): HTMLElement;
   setLngLat(ll: [number, number]): MlMarker;
   addTo(map: MlMap): MlMarker;
   remove(): void;
@@ -41,6 +42,7 @@ interface MlMap {
   addControl(control: unknown, position?: string): void;
   easeTo(opts: { center: [number, number]; zoom?: number; duration?: number }): void;
   getZoom(): number;
+  fitBounds(bounds: [[number, number], [number, number]], opts: { padding: number; maxZoom: number; duration: number }): void;
   touchZoomRotate: { disableRotation(): void };
 }
 interface MlLib {
@@ -96,6 +98,12 @@ export function MapView({ points, center, user, selectedId, onSelect, recenter }
   const [mode, setMode] = useState<'loading' | 'live' | 'offline'>('loading');
   const select = useRef(onSelect);
   select.current = onSelect;
+  // Firma de los puntos: los pines solo se redibujan si cambia algo visible, no en cada render.
+  const sig = points.map((p) => `${p.id}:${p.lat}:${p.lng}:${p.hot ? 1 : 0}`).join('|');
+  const pointsRef = useRef(points);
+  pointsRef.current = points;
+  const userRef = useRef(user);
+  userRef.current = user;
 
   // Crear el mapa una sola vez.
   useEffect(() => {
@@ -126,12 +134,19 @@ export function MapView({ points, center, user, selectedId, onSelect, recenter }
           touchPitch: false,
         });
         m.touchZoomRotate.disableRotation();
-        m.addControl(new ml.AttributionControl({ compact: true }), 'top-right');
+        m.addControl(new ml.AttributionControl({ compact: true }), 'bottom-left');
         m.addControl(new ml.NavigationControl({ showCompass: false }), 'bottom-right');
         m.on('load', () => {
           if (done || cancelled) return;
           done = true;
           window.clearTimeout(timer);
+          // Encuadra todos los restaurantes (y a la persona, si compartió su ubicación).
+          const all = [...pointsRef.current, ...(userRef.current ? [userRef.current] : [])];
+          if (all.length > 1) {
+            const lngs = all.map((p) => p.lng);
+            const lats = all.map((p) => p.lat);
+            m.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: 56, maxZoom: 15, duration: 0 });
+          }
           setMode('live');
         });
         m.on('error', () => {
@@ -157,20 +172,34 @@ export function MapView({ points, center, user, selectedId, onSelect, recenter }
     const ml = lib.current;
     const m = map.current;
     markers.current.forEach((x) => x.remove());
-    markers.current = points.map((p) =>
-      new ml.Marker({ element: pinElement(p, p.id === selectedId, (id) => select.current(id)), anchor: 'bottom' }).setLngLat([p.lng, p.lat]).addTo(m),
-    );
-    if (user) markers.current.push(new ml.Marker({ element: meElement() }).setLngLat([user.lng, user.lat]).addTo(m));
-  }, [mode, points, selectedId, user]);
+    markers.current = pointsRef.current.map((p) => {
+      const marker = new ml.Marker({ element: pinElement(p, p.id === selectedId, (id) => select.current(id)), anchor: 'bottom' });
+      marker.setLngLat([p.lng, p.lat]).addTo(m);
+      marker.getElement().setAttribute('aria-label', p.title); // addTo pone «Map marker»; va después
+      return marker;
+    });
+    const me = user;
+    if (me) {
+      const marker = new ml.Marker({ element: meElement() }).setLngLat([me.lng, me.lat]).addTo(m);
+      marker.getElement().setAttribute('aria-label', 'Tu ubicación');
+      markers.current.push(marker);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, sig, selectedId, user?.lat, user?.lng]);
 
   // Centrar al tocar «Cerca de mí» o al elegir un restaurante.
+  const firstRecenter = useRef(recenter);
   useEffect(() => {
-    if (mode === 'live' && map.current) map.current.easeTo({ center: [center.lng, center.lat], zoom: Math.max(13.4, map.current.getZoom()), duration: 600 });
+    if (recenter === firstRecenter.current) return;
+    if (mode === 'live' && map.current) map.current.easeTo({ center: [center.lng, center.lat], zoom: Math.max(14, map.current.getZoom()), duration: 600 });
   }, [mode, recenter, center.lat, center.lng]);
+  const firstSelected = useRef(selectedId);
   useEffect(() => {
-    const p = points.find((x) => x.id === selectedId);
+    if (selectedId === firstSelected.current) return; // al abrir, manda el encuadre inicial
+    firstSelected.current = null;
+    const p = pointsRef.current.find((x) => x.id === selectedId);
     if (mode === 'live' && map.current && p) map.current.easeTo({ center: [p.lng, p.lat], duration: 500 });
-  }, [mode, selectedId, points]);
+  }, [mode, selectedId]);
 
   return (
     <div className="map-box" aria-label="Mapa de restaurantes">

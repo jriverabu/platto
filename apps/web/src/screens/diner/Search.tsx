@@ -26,9 +26,9 @@ export function Search() {
   const [selected, setSelected] = useState<string | null>(null);
   const [recenter, setRecenter] = useState(0);
 
-  const listed = s.restaurants.filter((r) => isRestaurantListed(s, r.id));
-  const zones = [...new Set(listed.map((r) => r.zone))].sort();
-  const cuisines = [...new Set(listed.map((r) => r.cuisine))].sort();
+  const listed = useMemo(() => s.restaurants.filter((r) => isRestaurantListed(s, r.id)), [s]);
+  const zones = useMemo(() => [...new Set(listed.map((r) => r.zone))].sort(), [listed]);
+  const cuisines = useMemo(() => [...new Set(listed.map((r) => r.cuisine))].sort(), [listed]);
   const distance = (r: Restaurant) => distanceKm(loc.point, r);
 
   const results = useMemo(() => {

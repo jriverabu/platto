@@ -311,7 +311,7 @@ a { color: inherit; }
 
 /* ---------- Mapa ---------- */
 .map-box { position: relative; height: min(56vh, 480px); min-height: 300px; border-radius: 20px; overflow: hidden; background: #131316; border: 1px solid var(--line); }
-.map-canvas { position: absolute; inset: 0; }
+.map-box .map-canvas { position: absolute; inset: 0; } /* gana a .maplibregl-map { position: relative } */
 .map-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .map-offline {
   position: absolute; inset: 0;
@@ -323,7 +323,7 @@ a { color: inherit; }
 }
 .map-note { position: absolute; left: 12px; bottom: 10px; color: var(--text-3); }
 .map-pin {
-  position: relative; z-index: 2; min-width: 38px; height: 38px; padding: 0 8px; border-radius: 19px 19px 19px 4px; transform-origin: bottom left;
+  position: absolute; z-index: 2; min-width: 38px; height: 38px; padding: 0 8px; border-radius: 19px 19px 19px 4px; transform-origin: bottom left;
   border: 2px solid var(--bg); background: var(--surface-3); color: var(--text); font-size: 12px; font-weight: 700; letter-spacing: .02em;
   display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.45); cursor: pointer;
 }

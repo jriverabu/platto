@@ -2,7 +2,8 @@
 Genera los videos de demostración de Platto: ilustraciones animadas de cada plato,
 grabadas como MP4 vertical (540 × 960, 9 s, H.264) con su imagen de portada.
 
-Son marcadores de lugar para la demo; en producción cada restaurante sube su video real.
+Son marcadores de lugar. La demo ahora usa clips reales de Pexels (import_stock_videos.py);
+este script queda para regenerar las ilustraciones si se necesitan. ¡Sobrescribe public/videos!
 Requisitos: Python 3, Playwright con Chromium, ffmpeg.
 Uso: python3 apps/web/scripts/make_demo_videos.py
 """

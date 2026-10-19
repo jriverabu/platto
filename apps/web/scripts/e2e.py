@@ -36,7 +36,7 @@ def long_clip() -> pathlib.Path:
     out = SHOTS / "clip-23s.webm"
     if not out.exists():
         subprocess.run(
-            ["ffmpeg", "-y", "-loglevel", "error", "-stream_loop", "2", "-i", str(DIST / "videos" / "picana-al-carbon.mp4"),
+            ["ffmpeg", "-y", "-loglevel", "error", "-stream_loop", "4", "-i", str(DIST / "videos" / "picana-al-carbon.mp4"),
              "-t", "23", "-c:v", "libvpx-vp9", "-b:v", "600k", "-an", str(out)],
             check=True,
         )
@@ -155,10 +155,12 @@ def main() -> None:
         expect(page.locator(".card")).to_have_count(1)
         page.get_by_role("button", name="Con promoción").click()
 
-        # Mapa: sin internet en este entorno se ve el plano simple con los mismos puntos.
+        # Mapa: con internet carga OpenFreeMap; sin internet, el plano simple con los mismos puntos.
         page.get_by_role("button", name="Mapa", exact=True).click()
         page.wait_for_selector(".map-pin", timeout=15000)
-        page.locator(".map-pin", has_text="BN").first.click()
+        page.wait_for_timeout(2500)  # deja terminar el centrado del mapa
+        page.get_by_role("button", name="Brasa Negra", exact=True).click()
+        page.wait_for_timeout(1200)
         page.wait_for_timeout(400)
         expect(page.locator(".card", has_text="Brasa Negra")).to_be_visible()
         page.locator(".screen").first.evaluate("el => el.scrollTo(0, 260)")

@@ -4,7 +4,7 @@ import { addCalendarDays, localParts, zonedToUtc, type AvailabilityRule } from '
 import type { DemoState, DishRow, ReservationRow, ReviewRow, ViewRow } from './model';
 
 export const TZ = 'America/Bogota';
-export const DEMO_VERSION = 5;
+export const DEMO_VERSION = 6;
 
 const MIN = 60_000;
 
@@ -16,8 +16,15 @@ function rng(seed: number) {
   };
 }
 
+// Clips de Pexels (uso libre, ver public/videos/CREDITOS.md), recortados a vertical.
+// Son referenciales: en producción cada restaurante sube el video real de su plato.
+const DURATION: Record<string, number> = {
+  'chorizo-santarrosano': 9, 'costilla-ahumada': 9, 'picana-al-carbon': 6.7, 'mute-cucuteno': 6.8,
+  'sobrebarriga-criolla': 5.7, 'arepa-choclo': 8.3, 'ceviche-pesca': 9, 'arroz-mariscos': 8.4, 'bowl-quinua': 6.4,
+};
+
 function video(slug: string) {
-  return { src: `videos/${slug}.mp4`, poster: `videos/${slug}.jpg`, duration: 9, trimStart: 0 };
+  return { src: `videos/${slug}.mp4`, poster: `videos/${slug}.jpg`, duration: DURATION[slug] ?? 9, trimStart: 0 };
 }
 
 export function buildSeed(nowMs: number): DemoState {
