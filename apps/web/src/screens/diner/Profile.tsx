@@ -16,7 +16,7 @@ export function Profile() {
       <Header title="Perfil" />
       <div className="stack gap-24" style={{ padding: '4px 16px 28px', gap: 24 }}>
         <div className="row gap-12">
-          <span style={{ width: 64, height: 64, borderRadius: 32, background: 'var(--brasa)', color: 'var(--carbon)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--display)', fontWeight: 900, fontSize: 30 }}>
+          <span style={{ width: 64, height: 64, borderRadius: 32, background: 'var(--brand)', color: 'var(--on-brand)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--display)', fontWeight: 900, fontSize: 24 }}>
             {me.name.split(' ').map((p) => p[0]).join('')}
           </span>
           <span className="stack gap-4">
@@ -56,7 +56,7 @@ export function Profile() {
         <div className="paper stack gap-10" style={{ padding: 18 }}>
           <span className="display h3">¿Tienes un restaurante?</span>
           <span className="small" style={{ color: 'var(--tinta-2)', lineHeight: 1.45 }}>Muestra tus platos en video, recibe reservas y conoce qué ven tus clientes antes de llegar.</span>
-          <button className="btn btn-dark" onClick={() => setRole('restaurant')}>Ver el modo restaurante</button>
+          <button className="btn btn-primary" onClick={() => setRole('restaurant')}>Ver el modo restaurante</button>
         </div>
       </div>
     </div>

@@ -25,8 +25,8 @@ Se construye cuando el entorno de desarrollo tenga acceso al registro de npm (ve
 
 ## Librerías previstas
 
-`expo-router` (navegación), `expo-video` (reproducción HLS con precarga), `expo-image-picker` (grabar y recortar; en iOS limita a 10 s con `videoMaxDuration`), `expo-notifications` (push), `@supabase/supabase-js` (datos y tiempo real), `@expo-google-fonts/*` (Big Shoulders Display, Figtree, DM Mono), `@platto/core` (reglas y marca de este repositorio).
+`expo-router` (navegación), `expo-video` (reproducción HLS con precarga), `expo-image-picker` (grabar y recortar; en iOS limita a 10 s con `videoMaxDuration`), `expo-notifications` (push), `@supabase/supabase-js` (datos y tiempo real), `@expo-google-fonts/poppins` (Poppins), `@platto/core` (reglas y marca de este repositorio).
 
 ## Diseño
 
-La identidad visual sigue el prototipo de diseño del proyecto y está codificada en `packages/core/src/brand.ts`.
+La identidad visual («Ve. Elige. Disfruta.»: fondo noche, acento naranja `#FF5A1F`, Poppins) está codificada en `packages/core/src/brand.ts`. El logo en vector está en `apps/web/public/icons/` (`logo-mark.svg`, `wordmark.svg` y sus versiones claras).

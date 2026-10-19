@@ -78,7 +78,7 @@ create table public.restaurants (
   name text not null check (char_length(name) between 2 and 80),
   cuisine text not null default '',
   zone text not null default '',
-  city text not null default 'Bogotá',
+  city text not null default 'Cúcuta',
   address text not null default '',
   lat double precision check (lat is null or lat between -90 and 90),
   lng double precision check (lng is null or lng between -180 and 180),

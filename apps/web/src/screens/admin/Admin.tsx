@@ -38,7 +38,7 @@ export function AdminVideos() {
               <input className="input" style={{ minHeight: 44 }} placeholder="Motivo si lo rechazas (ej. tiene texto encima)" value={notes[d.id] ?? ''} onChange={(e) => setNotes({ ...notes, [d.id]: e.target.value })} aria-label="Motivo del rechazo" />
               <div className="row gap-8">
                 <button className="btn btn-ghost btn-sm grow" onClick={() => attempt(() => reviewVideo(d.id, false, notes[d.id] ?? ''), 'Rechazado. El restaurante ya sabe qué cambiar.')}>Rechazar</button>
-                <button className="btn btn-dark btn-sm" style={{ flex: 1.4 }} onClick={() => attempt(() => reviewVideo(d.id, true, ''), 'Aprobado. Ya se ve en Descubrir.')}>Aprobar y publicar</button>
+                <button className="btn btn-primary btn-sm" style={{ flex: 1.4 }} onClick={() => attempt(() => reviewVideo(d.id, true, ''), 'Aprobado. Ya se ve en Descubrir.')}>Aprobar y publicar</button>
               </div>
             </div>
           );

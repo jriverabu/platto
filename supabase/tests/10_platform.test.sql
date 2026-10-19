@@ -56,7 +56,7 @@ begin
 end;
 $$;
 
--- Viernes de la próxima semana (fecha local de Bogotá).
+-- Viernes de la próxima semana (fecha local de Colombia).
 create function tests.next_friday() returns date language sql stable as $$
   select (now() at time zone 'America/Bogota')::date
          + ((5 - extract(dow from (now() at time zone 'America/Bogota'))::int + 7) % 7) + 7;
@@ -96,7 +96,7 @@ set role anon;
 select tests.logout();
 select tests.check((select count(*) from public.restaurants) = 3, 'anónimo ve los 3 restaurantes activos');
 select tests.check((select name from public.list_restaurants() limit 1) = 'Brasa Negra', 'el plan Pro aparece primero');
-select tests.check((select count(*) from public.list_restaurants(p_zone => 'Usaquén')) = 1, 'filtra por zona');
+select tests.check((select count(*) from public.list_restaurants(p_zone => 'Quinta Oriental')) = 1, 'filtra por zona');
 select tests.check((select count(*) from public.get_available_slots('11111111-1111-4111-8111-111111111111', tests.next_friday(), 2)) = 12,
   'viernes: 6 franjas de almuerzo y 6 de cena');
 select tests.check((select count(*) from public.reservations) = 0, 'anónimo no ve reservas');
@@ -259,7 +259,7 @@ select tests.login('00000000-0000-4000-8000-0000000000c1');
 insert into public.reviews (reservation_id, diner_id, rating, comment, tags, dish_ids, restaurant_reply)
 values ('f0000000-0000-4000-8000-000000000001', auth.uid(), 5, '  La costilla se deshace.  ', '{Sabor,Porción}',
         array[(select id from public.dishes where name = 'Costilla ahumada 12 horas'),
-              (select id from public.dishes where name = 'Ajiaco santafereño')],
+              (select id from public.dishes where name = 'Mute cucuteño')],
         'Respuesta falsa');
 select tests.check(
   (select author_name = 'Camila R.' and comment = 'La costilla se deshace.' and restaurant_reply is null

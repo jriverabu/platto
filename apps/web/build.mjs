@@ -21,7 +21,7 @@ writeFileSync(
   resolve(dist, 'artifact.html'),
   [
     '<title>Platto</title>',
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">',
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">',
     '<link rel="stylesheet" href="app.css">',
     '<div id="root"></div>',
     '<script type="module" src="app.js"></script>',

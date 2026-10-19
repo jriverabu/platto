@@ -44,7 +44,7 @@ export function MyReservations() {
 
         <div className="stack gap-10">
           <span className="label">Próximas</span>
-          {upcoming.length === 0 && <Empty title="Sin reservas" body="Encuentra un plato en Descubrir y reserva desde ahí." action={<button className="btn btn-light" onClick={() => nav.switchTab('feed')}>Descubrir</button>} />}
+          {upcoming.length === 0 && <Empty title="Sin reservas" body="Encuentra un plato en Inicio y reserva desde ahí." action={<button className="btn btn-light" onClick={() => nav.switchTab('feed')}>Descubrir</button>} />}
           {upcoming.map((r) => <ReservationCard key={r.id} r={r} onOpen={() => nav.push({ name: 'reservation', id: r.id })} />)}
         </div>
 
@@ -108,7 +108,7 @@ export function ReservationDetail({ id }: { id: string }) {
       <div className="stack gap-16" style={{ padding: '8px 16px 28px' }}>
         <div className="paper ticket stack gap-10" style={{ padding: '22px 18px 18px', ['--notch' as string]: 'var(--carbon)' }}>
           <span className="row between"><span className="label">{rest.zone} · {rest.address}</span>{statusBadge(st)}</span>
-          <span className="display" style={{ fontSize: 42 }}>{rest.name}</span>
+          <span className="display" style={{ fontSize: 28 }}>{rest.name}</span>
           <span className="display h3">{formatDateShort(new Date(r.startsAt), rest.timezone)} · {formatTime(new Date(r.startsAt), rest.timezone)}</span>
           <span>Mesa para {r.partySize}{r.note ? ` · “${r.note}”` : ''}</span>
           <Perforation />
@@ -123,7 +123,7 @@ export function ReservationDetail({ id }: { id: string }) {
           </span>
         </div>
         {reviewable.ok && <button className="btn btn-primary btn-block" onClick={() => nav.push({ name: 'review', reservationId: r.id })}>Calificar visita</button>}
-        <button className="btn btn-light btn-block" onClick={() => nav.push({ name: 'restaurant', id: rest.id })}>Ver menú de {rest.name}</button>
+        <button className="btn btn-ghost btn-block" onClick={() => nav.push({ name: 'restaurant', id: rest.id })}>Ver menú de {rest.name}</button>
         {(st === 'pending' || st === 'confirmed') && (
           <button className="btn btn-ghost btn-block" onClick={() => attempt(() => cancelReservation(r.id), 'Reserva cancelada')}>
             {st === 'pending' ? 'Retirar solicitud' : 'Cancelar reserva'}

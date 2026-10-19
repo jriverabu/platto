@@ -24,10 +24,10 @@ export function ReviewScreen({ reservationId }: { reservationId: string }) {
     return (
       <div className="screen">
         <div className="stack gap-16" style={{ padding: '60px 20px' }}>
-          <span className="display" style={{ fontSize: 120, color: 'var(--brasa)' }}>{score}</span>
+          <span className="display" style={{ fontSize: 96, color: 'var(--brand)', lineHeight: 1 }}>{score}</span>
           <h1 className="display h1">Gracias por contarlo</h1>
           <p className="muted" style={{ margin: 0, lineHeight: 1.5 }}>Tu calificación ya cuenta en el promedio de {rest.name} y ayuda a que otros elijan mejor.</p>
-          <button className="btn btn-light btn-block" onClick={() => nav.switchTab('feed')}>Volver a descubrir</button>
+          <button className="btn btn-primary btn-block" onClick={() => nav.switchTab('feed')}>Volver al inicio</button>
         </div>
       </div>
     );
@@ -44,7 +44,7 @@ export function ReviewScreen({ reservationId }: { reservationId: string }) {
 
         <div className="card stack gap-16">
           <div className="row gap-12" style={{ alignItems: 'baseline' }}>
-            <span className="display" style={{ fontSize: 64, color: 'var(--brasa)', lineHeight: 0.8 }}>{score}</span>
+            <span className="display" style={{ fontSize: 52, color: 'var(--brand)', lineHeight: 1 }}>{score}</span>
             <span className="bold" style={{ fontSize: 18 }}>{RATING_LABELS[score]}</span>
           </div>
           <div className="score-tiles" role="radiogroup" aria-label="Calificación de 1 a 5">
@@ -65,7 +65,7 @@ export function ReviewScreen({ reservationId }: { reservationId: string }) {
                 <button key={d.id} aria-pressed={on} onClick={() => setDishIds(toggle(dishIds, d.id))} style={{ border: 0, padding: 0, background: 'none', color: 'inherit', textAlign: 'left' }} className="stack gap-6">
                   <span style={{ position: 'relative', height: 130, borderRadius: 12, overflow: 'hidden', display: 'block', outline: on ? '3px solid var(--brasa)' : 'none', outlineOffset: -3 }}>
                     {d.video?.poster && <img src={d.video.poster} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
-                    {on && <span style={{ position: 'absolute', right: 6, top: 6, width: 26, height: 26, borderRadius: 13, background: 'var(--brasa)', color: 'var(--carbon)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="check" size={14} stroke={3} /></span>}
+                    {on && <span style={{ position: 'absolute', right: 6, top: 6, width: 26, height: 26, borderRadius: 13, background: 'var(--brand)', color: 'var(--on-brand)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="check" size={14} stroke={3} /></span>}
                   </span>
                   <span className="small bold" style={{ lineHeight: 1.25 }}>{d.name}</span>
                 </button>

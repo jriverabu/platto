@@ -35,8 +35,8 @@ export interface Tab {
 
 export const TABS: Record<Role, Tab[]> = {
   diner: [
-    { id: 'feed', label: 'Descubrir', icon: 'play', root: { name: 'feed' } },
-    { id: 'search', label: 'Buscar', icon: 'search', root: { name: 'search' } },
+    { id: 'feed', label: 'Inicio', icon: 'home', root: { name: 'feed' } },
+    { id: 'search', label: 'Explorar', icon: 'search', root: { name: 'search' } },
     { id: 'reservations', label: 'Reservas', icon: 'calendar', root: { name: 'myReservations' } },
     { id: 'profile', label: 'Perfil', icon: 'user', root: { name: 'profile' } },
   ],

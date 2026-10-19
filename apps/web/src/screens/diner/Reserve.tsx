@@ -37,7 +37,7 @@ export function Reserve({ restaurantId }: { restaurantId: string }) {
               {live.status === 'confirmed' ? 'CONFIRMADA' : live.status === 'rejected' ? 'RECHAZADA' : 'ENVIADA'}
             </span>
             <span className="label">{live.status === 'pending' ? 'Pendiente de confirmación' : 'Respuesta del restaurante'}</span>
-            <span className="display" style={{ fontSize: 40 }}>{restaurant.name}</span>
+            <span className="display" style={{ fontSize: 28 }}>{restaurant.name}</span>
             <span className="display h3">Mesa para {live.partySize} · {formatDateShort(new Date(live.startsAt), restaurant.timezone)} · {formatTime(new Date(live.startsAt), restaurant.timezone)}</span>
             <Perforation />
             <span style={{ lineHeight: 1.5, fontSize: 15 }}>
@@ -51,7 +51,7 @@ export function Reserve({ restaurantId }: { restaurantId: string }) {
           <span className="small muted" style={{ lineHeight: 1.5 }}>
             En la demo puedes cambiar a <b>Restaurante</b> con el botón de arriba y aceptar esta solicitud tú mismo.
           </span>
-          <button className="btn btn-light btn-block" onClick={() => nav.openIn('reservations', { name: 'reservation', id: live.id })}>Ver mi reserva</button>
+          <button className="btn btn-primary btn-block" onClick={() => nav.openIn('reservations', { name: 'reservation', id: live.id })}>Ver mi reserva</button>
           <button className="btn btn-ghost btn-block" onClick={() => nav.switchTab('feed')}>Seguir descubriendo</button>
         </div>
       </div>

@@ -55,8 +55,9 @@ def main() -> None:
 
         page.goto(f"http://127.0.0.1:{port}/")
         expect(page.get_by_role("dialog", name="Bienvenida")).to_be_visible()
+        page.wait_for_timeout(600)
         shot("01-bienvenida")
-        page.get_by_role("button", name="Empezar").click()
+        page.get_by_role("button", name="Explorar la demo").click()
         page.wait_for_timeout(2500)
         shot("02-descubrir")
 
@@ -133,7 +134,7 @@ def main() -> None:
         page.get_by_role("button", name="Publicar calificación").click()
         expect(page.get_by_text("Gracias por contarlo")).to_be_visible()
 
-        page.get_by_role("button", name="Buscar").click()
+        page.get_by_role("button", name="Explorar", exact=True).click()
         page.wait_for_timeout(500)
         shot("17-buscar")
 

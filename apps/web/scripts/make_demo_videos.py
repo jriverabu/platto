@@ -127,7 +127,7 @@ DISHES = {
     + drops(['<circle cx="190" cy="575" r="30" fill="#B8C95A"/><circle cx="190" cy="575" r="22" fill="#DCE69A"/>'], start=2.0)
     + "</g>"
     + steam([210, 290]),
-    "ajiaco-santafereno": tiles("#1C3533", "#24423F")
+    "mute-cucuteno": tiles("#1C3533", "#24423F")
     + '<g class="push">'
     + plate(rim="#EEE6D6", well="#DDAF38", r=236)
     + '<g class="turn">'

@@ -17,7 +17,7 @@ export function RestaurantReviews() {
       <div className="stack gap-20" style={{ padding: '4px 16px 28px', gap: 20 }}>
         <div className="card row gap-16">
           <span className="stack center" style={{ width: 96 }}>
-            <span className="display" style={{ fontSize: 56 }}>{rating.average !== null ? formatRating(rating.average) : '—'}</span>
+            <span className="display" style={{ fontSize: 44 }}>{rating.average !== null ? formatRating(rating.average) : '—'}</span>
             <span className="tiny muted">{rating.count} reseñas</span>
           </span>
           <span className="stack gap-4 grow">
@@ -48,7 +48,7 @@ export function RestaurantReviews() {
                 </span>
               )}
               {r.reply ? (
-                <div style={{ background: 'var(--hueso)', borderRadius: 10, padding: '10px 12px', fontSize: 13, lineHeight: 1.4 }}><b>Tu respuesta:</b> {r.reply}</div>
+                <div className="note" style={{ fontSize: 13 }}><b style={{ color: 'var(--text)' }}>Tu respuesta:</b> {r.reply}</div>
               ) : (
                 <form className="row gap-8" onSubmit={(e) => { e.preventDefault(); attempt(() => replyReview(r.id, drafts[r.id] ?? ''), 'Respuesta publicada'); }}>
                   <input className="input grow" style={{ minHeight: 44 }} placeholder="Responder públicamente" maxLength={500} value={drafts[r.id] ?? ''} onChange={(e) => setDrafts({ ...drafts, [r.id]: e.target.value })} aria-label={`Responder a ${r.authorName}`} />

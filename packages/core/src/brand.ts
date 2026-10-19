@@ -1,35 +1,36 @@
 /**
- * Identidad visual de Platto, la misma del prototipo de diseño.
- * Concepto: la comanda de cocina. Fondo carbón para el comensal (noche de salida),
- * papel hueso para el restaurante (modo cocina), un solo acento: brasa.
+ * Identidad visual de Platto.
+ * Logo: el tenedor y el plato forman un botón de play (apps/web/public/icons/*.svg).
+ * Lema: «Ve. Elige. Disfruta.»
+ * Aspecto: noche (carbón profundo), un solo acento naranja, tipografía geométrica, tarjetas redondeadas.
  */
 export const COLORS = {
-  carbon: '#13110F', // fondo del comensal, texto sobre papel
-  carbonRaised: '#1F1B18', // tarjetas sobre carbón
-  carbonLine: '#2B2622', // divisores sobre carbón
-  hueso: '#F3EEE6', // papel: tiquetes y fondo del restaurante
-  huesoRaised: '#FFFFFF',
-  huesoLine: '#E2D9CC',
-  humo: '#A39A90', // texto secundario sobre carbón (contraste 6,7:1)
-  tinta: '#6B6259', // texto secundario sobre hueso (contraste 5:1)
-  brasa: '#FF5B2E', // acento: botones principales, progreso, selección
-  brasaTexto: '#B8330D', // brasa legible sobre papel (5,3:1)
-  brasaSobreCarbon: '#FF7A52', // precios sobre carbón (7,4:1)
-  hoja: '#B9E36A', // confirmado, abierto, activo (sobre carbón)
-  hojaTexto: '#2F5A12', // confirmado sobre papel
-  alerta: '#8A2A0B', // rechazado, no asistió, vence pronto (sobre papel)
+  bg: '#0E0E10', // fondo de la app
+  surface: '#18181B', // tarjetas
+  surface2: '#222226', // campos, notas, elementos sobre tarjetas
+  surface3: '#2C2C31', // botones secundarios, pistas
+  line: '#29292E', // divisores
+  lineStrong: '#3A3A41', // bordes de campos y chips
+  text: '#F5F5F7',
+  text2: '#B4B4BC', // texto secundario
+  text3: '#8D8D96', // texto terciario (contraste ≥ 5:1 sobre el fondo)
+  brand: '#FF5A1F', // naranja de marca: botón principal, selección, play del logo
+  brandHi: '#FF7A45', // naranja para texto sobre fondo oscuro
+  onBrand: '#FFFFFF',
+  ok: '#6FD08C',
+  warn: '#FFC15A',
+  bad: '#FF8070',
+  ink: '#1A1A1C', // trazo del logo sobre fondo claro
 } as const;
 
 export const FONTS = {
-  /** Titulares en mayúscula, como un tablero de menú. Google Fonts: Big Shoulders Display 800/900. */
-  display: 'BigShouldersDisplay',
-  /** Texto de interfaz. Google Fonts: Figtree 400–700. */
-  body: 'Figtree',
-  /** Precios, horas y etiquetas de tiquete. Google Fonts: DM Mono 400/500. */
-  mono: 'DMMono',
+  /** Toda la interfaz. Google Fonts: Poppins 400, 500, 600, 700. */
+  body: 'Poppins',
 } as const;
 
-export const RADII = { chip: 999, card: 16, button: 14, input: 12 } as const;
+export const TAGLINE = 'Ve. Elige. Disfruta.';
+
+export const RADII = { chip: 999, card: 18, button: 14, input: 14 } as const;
 
 /** Tamaño mínimo de cualquier elemento que se toca. */
 export const TOUCH_TARGET = 44;

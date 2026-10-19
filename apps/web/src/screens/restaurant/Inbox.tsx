@@ -62,7 +62,7 @@ export function Inbox() {
                 </span>
                 <div className="row gap-8">
                   <button className="btn btn-ghost btn-sm grow" onClick={() => attempt(() => respondReservation(r.id, false), 'Rechazada. Le sugerimos otros horarios.')}>Rechazar</button>
-                  <button className="btn btn-dark btn-sm" style={{ flex: 1.4 }} onClick={() => attempt(() => respondReservation(r.id, true), 'Confirmada. El cliente ya fue avisado.')}>Aceptar</button>
+                  <button className="btn btn-primary btn-sm" style={{ flex: 1.4 }} onClick={() => attempt(() => respondReservation(r.id, true), 'Confirmada. El cliente ya fue avisado.')}>Aceptar</button>
                 </div>
               </div>
             );
@@ -87,10 +87,10 @@ export function Inbox() {
                     </span>
                     {canMark ? (
                       <span className="row gap-6">
-                        <button className="icon-btn" aria-label="No llegó" style={{ color: 'var(--alerta)', border: '1.5px solid #cfc6b8', background: 'transparent', borderRadius: 12 }} onClick={() => attempt(() => markAttendance(r.id, false), 'Marcado como no asistió')}>
+                        <button className="icon-btn" aria-label="No llegó" style={{ color: 'var(--alerta)', border: '1.5px solid var(--line-strong)', background: 'transparent', borderRadius: 12 }} onClick={() => attempt(() => markAttendance(r.id, false), 'Marcado como no asistió')}>
                           <Icon name="close" size={18} stroke={2.6} />
                         </button>
-                        <button className="btn btn-dark btn-sm" onClick={() => attempt(() => markAttendance(r.id, true), 'Llegó. Podrá calificar en 2 horas.')}>Llegó</button>
+                        <button className="btn btn-primary btn-sm" onClick={() => attempt(() => markAttendance(r.id, true), 'Llegó. Podrá calificar en 2 horas.')}>Llegó</button>
                       </span>
                     ) : (
                       statusBadge(status)

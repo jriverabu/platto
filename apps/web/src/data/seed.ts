@@ -1,10 +1,10 @@
-// Datos de demostración: cuatro restaurantes de Bogotá con menú en video,
+// Datos de demostración: cuatro restaurantes de Cúcuta con menú en video,
 // reservas en distintos estados y reseñas verificadas. Todo es de ejemplo.
 import { addCalendarDays, localParts, zonedToUtc, type AvailabilityRule } from '@platto/core';
 import type { DemoState, DishRow, ReservationRow, ReviewRow, ViewRow } from './model';
 
 export const TZ = 'America/Bogota';
-export const DEMO_VERSION = 3;
+export const DEMO_VERSION = 4;
 
 const MIN = 60_000;
 
@@ -42,23 +42,23 @@ export function buildSeed(nowMs: number): DemoState {
 
   const restaurants: DemoState['restaurants'] = [
     {
-      id: 'r-brasa', slug: 'brasa-negra', name: 'Brasa Negra', cuisine: 'Parrilla', zone: 'Chapinero',
-      address: 'Calle 59 # 5-12', priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
+      id: 'r-brasa', slug: 'brasa-negra', name: 'Brasa Negra', cuisine: 'Parrilla', zone: 'Caobos',
+      address: 'Av. 0 # 15-42', priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Carnes al carbón y leña de naranjo, con salsas de la casa.', coverDishId: 'd-costilla',
     },
     {
-      id: 'r-fogon', slug: 'fogon-sabanero', name: 'Fogón Sabanero', cuisine: 'Colombiana', zone: 'Teusaquillo',
-      address: 'Carrera 17 # 39-40', priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
-      description: 'Ajiaco, sobrebarriga y arepas como en la casa de la abuela.', coverDishId: 'd-ajiaco',
+      id: 'r-fogon', slug: 'fogon-cucuteno', name: 'Fogón Cucuteño', cuisine: 'Típica', zone: 'Centro',
+      address: 'Calle 10 # 4-58', priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
+      description: 'Mute, sobrebarriga y arepas como en la casa de la abuela.', coverDishId: 'd-mute',
     },
     {
-      id: 'r-corvina', slug: 'casa-corvina', name: 'Casa Corvina', cuisine: 'Mariscos', zone: 'Usaquén',
-      address: 'Carrera 6 # 119-24', priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
+      id: 'r-corvina', slug: 'casa-corvina', name: 'Casa Corvina', cuisine: 'Mariscos', zone: 'Quinta Oriental',
+      address: 'Av. 5 # 14-21', priceLevel: 3, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Ceviches y pesca del día del Pacífico colombiano.', coverDishId: 'd-ceviche',
     },
     {
-      id: 'r-verde', slug: 'verde-raiz', name: 'Verde Raíz', cuisine: 'Vegetariana', zone: 'Chapinero',
-      address: 'Calle 65 # 4-35', priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
+      id: 'r-verde', slug: 'verde-raiz', name: 'Verde Raíz', cuisine: 'Vegetariana', zone: 'La Ceiba',
+      address: 'Calle 2N # 8-17', priceLevel: 2, timezone: TZ, status: 'active', reservationsEnabled: true,
       description: 'Cocina de huerta sabanera, sin carne y sin aburrir.', coverDishId: 'd-bowl',
     },
   ];
@@ -94,7 +94,7 @@ export function buildSeed(nowMs: number): DemoState {
     dish({ id: 'd-chorizo', restaurantId: 'r-brasa', categoryId: 'c-brasa-entradas', name: 'Chorizo santarrosano', description: 'Tres chorizos a la brasa con arepa de maíz pelado y limón.', priceCop: 24000, tags: ['Para compartir'], video: video('chorizo-santarrosano') }),
     dish({ id: 'd-costilla', restaurantId: 'r-brasa', categoryId: 'c-brasa-fuertes', name: 'Costilla ahumada 12 horas', description: 'Costilla de res en leña de naranjo, chimichurri de la casa y papa criolla.', priceCop: 46000, tags: ['Sin gluten'], video: video('costilla-ahumada') }),
     dish({ id: 'd-picana', restaurantId: 'r-brasa', categoryId: 'c-brasa-fuertes', name: 'Picaña al carbón', description: '300 g, término a elección, con yuca frita y ají de la casa.', priceCop: 52000, tags: [], position: 2, video: video('picana-al-carbon') }),
-    dish({ id: 'd-ajiaco', restaurantId: 'r-fogon', categoryId: 'c-fogon-sopas', name: 'Ajiaco santafereño', description: 'Con pollo desmechado, mazorca, guascas, crema, alcaparras y aguacate.', priceCop: 32000, tags: ['Sin gluten'], video: video('ajiaco-santafereno') }),
+    dish({ id: 'd-mute', restaurantId: 'r-fogon', categoryId: 'c-fogon-sopas', name: 'Mute cucuteño', description: 'Sopa espesa de maíz, carne de res y cerdo, garbanzo y papa, con arepa.', priceCop: 32000, tags: ['Sin gluten'], video: video('mute-cucuteno') }),
     dish({ id: 'd-sobrebarriga', restaurantId: 'r-fogon', categoryId: 'c-fogon-tipicos', name: 'Sobrebarriga a la criolla', description: 'En salsa de tomate y cebolla, con papa salada y arroz.', priceCop: 36000, tags: [], video: video('sobrebarriga-criolla') }),
     dish({ id: 'd-arepa', restaurantId: 'r-fogon', categoryId: 'c-fogon-tipicos', name: 'Arepa de choclo con hogao', description: 'Arepa dulce de maíz tierno, quesito y hogao de la casa.', priceCop: 16000, tags: ['Vegetariano'], position: 2, video: video('arepa-choclo') }),
     dish({ id: 'd-ceviche', restaurantId: 'r-corvina', categoryId: 'c-corvina-crudos', name: 'Ceviche de pesca del día', description: 'Corvina en leche de tigre, cebolla morada, ají y maíz tostado.', priceCop: 38000, tags: ['Picante'], video: video('ceviche-pesca') }),
@@ -139,7 +139,7 @@ export function buildSeed(nowMs: number): DemoState {
       'Un poco ruidoso el viernes, pero la comida lo vale.',
     ],
     'r-fogon': [
-      'El ajiaco más parecido al de mi abuela.',
+      'El mute más parecido al de mi abuela.',
       'Porciones generosas y precio justo.',
       'La arepa de choclo con hogao, imperdible.',
     ],
@@ -195,7 +195,7 @@ export function buildSeed(nowMs: number): DemoState {
   reservation({ restaurantId: 'r-fogon', dinerId: 'u-camila', startsAt: at(3, '13:00'), partySize: 4, status: 'confirmed', note: 'Almuerzo familiar.', createdAt: nowMs - 20 * 60 * MIN, expiresAt: nowMs - 18 * 60 * MIN, respondedAt: nowMs - 19 * 60 * MIN });
 
   // Vistas de los últimos 30 días para las estadísticas.
-  const weights: Record<string, number> = { 'd-costilla': 140, 'd-picana': 98, 'd-chorizo': 54, 'd-ajiaco': 120, 'd-sobrebarriga': 60, 'd-arepa': 45, 'd-ceviche': 88, 'd-bowl': 70 };
+  const weights: Record<string, number> = { 'd-costilla': 140, 'd-picana': 98, 'd-chorizo': 54, 'd-mute': 120, 'd-sobrebarriga': 60, 'd-arepa': 45, 'd-ceviche': 88, 'd-bowl': 70 };
   const views: ViewRow[] = [];
   for (const d of dishes) {
     const n = weights[d.id] ?? 0;
@@ -220,9 +220,9 @@ export function buildSeed(nowMs: number): DemoState {
     reservations,
     reviews,
     views,
-    saved: ['d-ajiaco'],
+    saved: ['d-mute'],
     notifications: [
-      { id: 'n-1', to: 'diner', title: '¡Tu mesa está confirmada!', body: 'Fogón Sabanero te espera. Mesa para 4.', at: nowMs - 19 * 60 * MIN, read: false },
+      { id: 'n-1', to: 'diner', title: '¡Tu mesa está confirmada!', body: 'Fogón Cucuteño te espera. Mesa para 4.', at: nowMs - 19 * 60 * MIN, read: false },
       { id: 'n-2', to: 'r-brasa', title: 'Nueva solicitud de reserva', body: 'Mesa para 8 · Grupo de oficina', at: nowMs - 76 * MIN, read: false },
       { id: 'n-3', to: 'admin', title: 'Video para revisar', body: 'Casa Corvina · Arroz con mariscos', at: nowMs - 50 * MIN, read: false },
     ],

@@ -3,6 +3,7 @@ import { advanceClock, markNotificationsRead, resetDemo, setRole, setWelcomed, u
 import type { Role } from './data/model';
 import { NavProvider, TABS, useNav, type Route } from './nav';
 import { Icon, Sheet, ToastHost, toast } from './components/ui';
+import { LogoMark, Tagline, Wordmark } from './components/Brand';
 import { formatDateShort, formatTime } from '@platto/core';
 import { TZ } from './data/seed';
 
@@ -106,7 +107,7 @@ function DemoSheet({ onClose }: { onClose: () => void }) {
               onClose();
             }}
           >
-            <span className="icon-btn" style={{ background: s.role === r ? 'var(--brasa)' : 'var(--hueso-3)', color: 'var(--carbon)' }}>
+            <span className="icon-btn" style={{ background: s.role === r ? 'var(--brand)' : 'var(--surface-3)', color: s.role === r ? 'var(--on-brand)' : 'var(--text)' }}>
               <Icon name={r === 'diner' ? 'user' : r === 'restaurant' ? 'store' : 'shield'} />
             </span>
             <span className="stack gap-4 grow">
@@ -154,26 +155,26 @@ function DemoSheet({ onClose }: { onClose: () => void }) {
 
 function Welcome() {
   return (
-    <Sheet onClose={setWelcomed} label="Bienvenida">
-      <div className="stack gap-12">
-        <span className="logo" style={{ color: 'var(--carbon)' }}>platto<span>.</span></span>
-        <span className="display h1">Cada plato en 10 segundos</span>
-        <span style={{ lineHeight: 1.5, color: 'var(--tinta-2)' }}>
-          Descubre restaurantes por sus platos en video, reserva mesa en dos toques y califica solo si fuiste.
-        </span>
-        <span className="small" style={{ lineHeight: 1.5, color: 'var(--tinta)' }}>
-          Esta es una demo con restaurantes y videos de ejemplo. Con el botón <b>Demo</b> de arriba cambias entre comensal, restaurante y administrador.
-        </span>
+    <div className="splash" role="dialog" aria-modal="true" aria-label="Bienvenida">
+      <LogoMark size={132} ink="var(--text)" />
+      <div className="stack center gap-10">
+        <Wordmark height={40} ink="var(--text)" />
+        <Tagline size={12} />
       </div>
-      <button className="btn btn-dark btn-block" onClick={setWelcomed}>Empezar</button>
-    </Sheet>
+      <p style={{ marginTop: 8 }}>Descubre platos increíbles en video de 10 segundos, reserva mesa en dos toques y califica solo si fuiste.</p>
+      <div className="stack gap-10" style={{ width: '100%', maxWidth: 320, marginTop: 18 }}>
+        <button className="btn btn-primary btn-block" onClick={setWelcomed}>Explorar la demo</button>
+        <button className="btn btn-ghost btn-block" onClick={() => { setRole('restaurant'); setWelcomed(); }}>Ver como restaurante</button>
+      </div>
+      <span className="tiny muted" style={{ maxWidth: 300, lineHeight: 1.5 }}>Demo con restaurantes y videos de ejemplo en Cúcuta. Con «Cambiar rol» pasas entre comensal, restaurante y administrador.</span>
+    </div>
   );
 }
 
 export function App() {
   const s = useDemo();
   const [demoOpen, setDemoOpen] = useState(false);
-  const theme = s.role === 'diner' ? 'theme-night' : 'theme-paper';
+  const theme = 'theme-night';
 
   useEffect(() => {
     if (demoOpen) markNotificationsRead(s.role === 'diner' ? 'diner' : s.role === 'admin' ? 'admin' : s.ownerRestaurantId);
@@ -182,15 +183,19 @@ export function App() {
   return (
     <>
       <aside className="side">
-        <h1>platto<span>.</span></h1>
+        <LogoMark size={96} ink="var(--text)" />
+        <Wordmark height={36} ink="var(--text)" />
+        <Tagline size={13} />
         <p>Descubre restaurantes por sus platos en video de 10 segundos, reserva en dos toques y califica solo si fuiste.</p>
-        <p>Demo funcional: cambia de rol con el botón <b style={{ color: 'var(--brasa)' }}>Demo</b> para ver al comensal, al restaurante y al administrador trabajando sobre los mismos datos.</p>
+        <p>Demo funcional: con <b style={{ color: 'var(--brand-hi)' }}>Cambiar rol</b> ves al comensal, al restaurante y al administrador trabajando sobre los mismos datos.</p>
         <p className="small">En el teléfono, ábrela en el navegador y elige «Agregar a pantalla de inicio» para instalarla.</p>
       </aside>
       <div className={`app ${theme}`}>
-        <div className="row between" style={{ flex: 'none', background: 'var(--brasa)', color: 'var(--carbon)', padding: 'calc(4px + var(--safe-top)) 12px 4px', minHeight: 32 }}>
-          <span className="mono" style={{ fontSize: 11, letterSpacing: 1, fontWeight: 500 }}>DEMO · {ROLE_INFO[s.role].title.toUpperCase()}</span>
-          <button onClick={() => setDemoOpen(true)} style={{ border: 0, background: 'var(--carbon)', color: 'var(--hueso)', borderRadius: 999, minHeight: 28, padding: '0 12px', fontWeight: 700, fontSize: 12 }} aria-label="Abrir controles de la demo">
+        <div className="row between" style={{ flex: 'none', background: 'var(--surface)', borderBottom: '1px solid var(--line)', padding: 'calc(4px + var(--safe-top)) 12px 4px', minHeight: 34 }}>
+          <span className="row gap-6" style={{ fontSize: 11, letterSpacing: 1.2, fontWeight: 600, color: 'var(--text-2)' }}>
+            <span style={{ width: 7, height: 7, borderRadius: 4, background: 'var(--brand)' }} />DEMO · {ROLE_INFO[s.role].title.toUpperCase()}
+          </span>
+          <button onClick={() => setDemoOpen(true)} style={{ border: 0, background: 'var(--brand)', color: 'var(--on-brand)', borderRadius: 999, minHeight: 28, padding: '0 12px', fontWeight: 600, fontSize: 12 }} aria-label="Abrir controles de la demo">
             Cambiar rol
           </button>
         </div>

@@ -1,16 +1,16 @@
 -- Datos de demostración para desarrollo local (`supabase db reset`).
--- Tres restaurantes de ejemplo en Bogotá, con menú y horarios. No incluye usuarios:
+-- Tres restaurantes de ejemplo en Cúcuta, con menú y horarios. No incluye usuarios:
 -- regístrate en la app y conviértete en administrador con el comando de docs/CONFIGURACION.md.
 
 insert into public.restaurants (id, slug, name, cuisine, zone, address, lat, lng, price_level, description, status) values
-  ('11111111-1111-4111-8111-111111111111', 'brasa-negra', 'Brasa Negra', 'Parrilla de leña', 'Chapinero',
-   'Calle 59 # 5-12', 4.6466, -74.0619, 3,
+  ('11111111-1111-4111-8111-111111111111', 'brasa-negra', 'Brasa Negra', 'Parrilla de leña', 'Caobos',
+   'Av. 0 # 15-42', 7.8986, -72.4960, 3,
    'Carnes al carbón y leña de naranjo, con salsas de la casa.', 'active'),
-  ('22222222-2222-4222-8222-222222222222', 'fogon-sabanero', 'Fogón Sabanero', 'Cocina santafereña', 'Teusaquillo',
-   'Carrera 17 # 39-40', 4.6271, -74.0717, 2,
-   'Ajiaco, tamales y sobrebarriga como en la casa de la abuela.', 'active'),
-  ('33333333-3333-4333-8333-333333333333', 'casa-corvina', 'Casa Corvina', 'Pescados y mariscos', 'Usaquén',
-   'Carrera 6 # 119-24', 4.6957, -74.0308, 3,
+  ('22222222-2222-4222-8222-222222222222', 'fogon-cucuteno', 'Fogón Cucuteño', 'Cocina típica', 'Centro',
+   'Calle 10 # 4-58', 7.8833, -72.5050, 2,
+   'Mute, pastel de garbanzo y sobrebarriga como en la casa de la abuela.', 'active'),
+  ('33333333-3333-4333-8333-333333333333', 'casa-corvina', 'Casa Corvina', 'Pescados y mariscos', 'Quinta Oriental',
+   'Av. 5 # 14-21', 7.8890, -72.4920, 3,
    'Ceviches, tiraditos y pesca del día del Pacífico colombiano.', 'active');
 
 insert into public.subscriptions (restaurant_id, plan, status, provider, current_period_end) values
@@ -33,8 +33,8 @@ insert into public.dishes (restaurant_id, category_id, name, description, price_
    'Costilla de res en leña de naranjo, chimichurri de la casa y papa criolla.', 46000, '{"Sin gluten"}', 1),
   ('11111111-1111-4111-8111-111111111111', 'a1000000-0000-4000-8000-000000000002', 'Picaña al carbón',
    '300 g, término a elección, con yuca frita y ají de la casa.', 52000, '{}', 2),
-  ('22222222-2222-4222-8222-222222222222', 'a2000000-0000-4000-8000-000000000001', 'Ajiaco santafereño',
-   'Con pollo desmechado, mazorca, guascas, crema, alcaparras y aguacate.', 32000, '{"Sin gluten"}', 1),
+  ('22222222-2222-4222-8222-222222222222', 'a2000000-0000-4000-8000-000000000001', 'Mute cucuteño',
+   'Sopa espesa de maíz, carne de res y cerdo, garbanzo y papa, con arepa.', 32000, '{"Sin gluten"}', 1),
   ('22222222-2222-4222-8222-222222222222', 'a2000000-0000-4000-8000-000000000002', 'Sobrebarriga a la criolla',
    'En salsa de tomate y cebolla, con papa salada y arroz.', 36000, '{}', 1),
   ('33333333-3333-4333-8333-333333333333', 'a3000000-0000-4000-8000-000000000001', 'Ceviche de pesca del día',

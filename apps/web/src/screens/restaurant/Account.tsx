@@ -32,22 +32,22 @@ export function Account() {
     <div className="screen">
       <Header kicker={rest.name} title="Cuenta" />
       <div className="stack gap-24" style={{ padding: '4px 16px 28px', gap: 24 }}>
-        <div className="ticket" style={{ background: 'var(--carbon)', color: 'var(--hueso)', borderRadius: 20, padding: '20px 18px 16px', display: 'flex', flexDirection: 'column', gap: 12, ['--notch' as string]: 'var(--hueso)' }}>
+        <div className="ticket" style={{ background: 'var(--surface)', border: '1.5px solid var(--brand)', color: 'var(--text)', borderRadius: 20, padding: '20px 18px 16px', display: 'flex', flexDirection: 'column', gap: 12, ['--notch' as string]: 'var(--hueso)' }}>
           <div className="row between">
             <span className="label">Plan actual</span>
             <span className={`badge ${sub.status === 'active' || sub.status === 'trialing' ? 'badge-ok' : 'badge-warn'}`}>{SUBSCRIPTION_LABEL[sub.status]}</span>
           </div>
-          <span className="display" style={{ fontSize: 72, color: 'var(--brasa)', lineHeight: 0.8 }}>{plan.name}</span>
+          <span className="display" style={{ fontSize: 40, color: 'var(--brand-hi)', lineHeight: 1 }}>{plan.name}</span>
           <span className="small" style={{ color: 'var(--humo)' }}>
             {sub.status === 'past_due' && sub.graceUntil
               ? `Pago pendiente: sigues visible hasta el ${formatDateShort(new Date(sub.graceUntil), rest.timezone)}.`
               : `Próximo cobro: ${formatDateShort(new Date(sub.currentPeriodEnd), rest.timezone)}`}
           </span>
-          <div className="perforation" aria-hidden="true" style={{ ['--notch' as string]: 'var(--hueso)' }}><span style={{ borderTopColor: 'var(--carbon-line)' }} /></div>
+          <div className="perforation" aria-hidden="true" />
           <div className="stack gap-8 small">
             {plan.features.map((f) => <span key={f} className="row gap-8"><span style={{ color: 'var(--brasa)', display: 'flex' }}><Icon name="check" size={16} stroke={3} /></span>{f}</span>)}
           </div>
-          <button className="btn btn-light btn-sm" onClick={() => nav.push({ name: 'r-plan' })}>Cambiar de plan</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => nav.push({ name: 'r-plan' })}>Cambiar de plan</button>
         </div>
 
         <section className="stack gap-10">
@@ -104,11 +104,11 @@ export function PlanScreen() {
           const p = PLANS[id];
           const current = sub.plan === id;
           return (
-            <div key={id} className="card stack gap-10" style={current ? { outline: '2px solid var(--carbon)' } : undefined}>
+            <div key={id} className="card stack gap-10" style={current ? { outline: '2px solid var(--brand)' } : undefined}>
               <div className="row between"><span className="display h2">{p.name}</span>{current && <span className="badge badge-ok">Tu plan</span>}</div>
               <span className="mono">[PRECIO] COP / mes</span>
               <div className="stack gap-6 small">{p.features.map((f) => <span key={f} className="row gap-8"><Icon name="check" size={16} stroke={3} />{f}</span>)}</div>
-              {!current && <button className="btn btn-dark" onClick={() => setCheckout(id)}>Cambiar a {p.name}</button>}
+              {!current && <button className="btn btn-primary" onClick={() => setCheckout(id)}>Cambiar a {p.name}</button>}
             </div>
           );
         })}

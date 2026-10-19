@@ -6,6 +6,8 @@ Platto como app web instalable: se abre con un link o un QR y se agrega a la pan
 - **Restaurante:** bandeja de solicitudes con cuenta regresiva, agenda del día (llegó / no llegó), menú con subida y recorte de video a 10 s, reseñas con respuesta, horarios y cupos, plan y estadísticas.
 - **Administrador:** aprobación de videos, estado de restaurantes y suscripciones, moderación de reseñas.
 
+La identidad visual sigue el rediseño de octubre de 2026: logo de tenedor y plato con play, lema «Ve. Elige. Disfruta.», fondo noche y acento naranja. Los datos de ejemplo están en Cúcuta.
+
 Hoy corre en **modo demo**: los datos viven en el navegador (`src/data/store.ts`) y se aplican las mismas reglas que la base de datos usando `@platto/core`. Un botón **Demo** cambia de rol y adelanta el reloj para mostrar flujos que toman horas (calificar 2 h después, gracia de 7 días).
 
 ## Comandos

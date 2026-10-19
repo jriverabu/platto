@@ -35,6 +35,14 @@ const PATHS: Record<string, ReactNode> = {
   edit: <><path d="M4 20h4L20 8l-4-4L4 16z" /></>,
   fast: <><path d="M4 6l7 6-7 6z" /><path d="M13 6l7 6-7 6z" /></>,
   reset: <><path d="M4 4v6h6" /><path d="M5 15a8 8 0 1 0 2-8.5L4 10" /></>,
+  home: <><path d="M4 11l8-7 8 7" /><path d="M6 9.5V20h12V9.5" /><path d="M10 20v-5h4v5" /></>,
+  verified: <><path d="M12 2.5l2.4 1.8 3-.2.9 2.9 2.4 1.8-1 2.8 1 2.8-2.4 1.8-.9 2.9-3-.2L12 21.5l-2.4-1.8-3 .2-.9-2.9L3.3 15.2l1-2.8-1-2.8 2.4-1.8.9-2.9 3 .2z" fill="currentColor" stroke="none" /><path d="M8.5 12.2l2.4 2.4 4.6-4.8" stroke="var(--bg)" strokeWidth="2.2" /></>,
+  info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6" /><path d="M12 7.5v.5" /></>,
+  grid: <><rect x="4" y="4" width="7" height="7" rx="2" /><rect x="13" y="4" width="7" height="7" rx="2" /><rect x="4" y="13" width="7" height="7" rx="2" /><rect x="13" y="13" width="7" height="7" rx="2" /></>,
+  flame: <path d="M12 3c1 3 5 5.5 5 10a5 5 0 0 1-10 0c0-2.2 1-3.6 2.2-4.8C9.5 10 10.5 11 11 12c.6-3 1-6 1-9z" />,
+  bowl: <><path d="M3 11h18a9 9 0 0 1-18 0z" /><path d="M8 7c0-1.5 1.5-1.5 1.5-3" /><path d="M12.5 7c0-1.5 1.5-1.5 1.5-3" /></>,
+  fish: <><path d="M3 12c3-4.5 9-6 14-2l4-3v10l-4-3c-5 4-11 2.5-14-2z" /><circle cx="14.5" cy="11" r=".8" fill="currentColor" /></>,
+  leaf: <><path d="M5 19C5 10 10 5 20 4c-.5 9-5 15-13 15z" /><path d="M5 19l8-8" /></>,
 };
 
 export function Icon({ name, size = 22, stroke = 2 }: { name: keyof typeof PATHS | string; size?: number; stroke?: number }) {

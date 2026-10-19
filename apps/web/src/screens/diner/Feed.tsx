@@ -3,14 +3,15 @@ import { formatCop, formatRating } from '@platto/core';
 import { logView, ratingOf, selectFeed, toggleSaved, useDemo, type FeedItem } from '../../data/store';
 import { useNav } from '../../nav';
 import { DishVideo, isMuted, onMutedChange, setMuted } from '../../components/Video';
-import { Icon, Perforation, toast } from '../../components/ui';
+import { Icon, toast } from '../../components/ui';
+import { Wordmark } from '../../components/Brand';
 
-const ZONES = [null, 'Chapinero', 'Teusaquillo', 'Usaquén'] as const;
 
 export function Feed() {
   const s = useDemo();
   const [zone, setZone] = useState<string | null>(null);
   const items = useMemo(() => selectFeed(s, zone), [s, zone]);
+  const zones = useMemo(() => [null, ...[...new Set(s.restaurants.map((r) => r.zone))].sort()], [s.restaurants]);
   const [active, setActive] = useState(0);
   const container = useRef<HTMLDivElement>(null);
 
@@ -50,6 +51,7 @@ export function Feed() {
           index={i}
           active={i === active}
           zone={zone}
+          zones={zones}
           onZone={setZone}
           saved={s.saved.includes(item.dish.id)}
           rating={ratingOf(s, item.restaurant.id)}
@@ -60,12 +62,13 @@ export function Feed() {
 }
 
 function FeedCard({
-  item, index, active, zone, onZone, saved, rating,
+  item, index, active, zone, zones, onZone, saved, rating,
 }: {
   item: FeedItem;
   index: number;
   active: boolean;
   zone: string | null;
+  zones: (string | null)[];
   onZone: (z: string | null) => void;
   saved: boolean;
   rating: ReturnType<typeof ratingOf>;
@@ -116,22 +119,22 @@ function FeedCard({
           ))}
         </div>
         <div className="row between">
-          <span className="logo">platto<span>.</span></span>
+          <Wordmark height={22} ink="#fff" />
           <span className="row gap-8">
-            <span className="mono" style={{ fontSize: 11, letterSpacing: 1, padding: '6px 10px', borderRadius: 999, background: 'rgba(19,17,15,.6)' }}>10 S</span>
+            <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1, padding: '6px 10px', borderRadius: 999, background: 'rgba(14,14,16,.55)' }}>10 S</span>
             <button className="icon-btn glass" aria-label="Buscar restaurantes" onClick={() => nav.switchTab('search')}>
               <Icon name="search" size={20} />
             </button>
           </span>
         </div>
         <div className="chips" style={{ margin: 0, padding: 0 }}>
-          {ZONES.map((z) => (
+          {zones.map((z) => (
             <button
               key={z ?? 'all'}
               className="chip"
               aria-pressed={zone === z}
               onClick={() => onZone(z)}
-              style={zone === z ? undefined : { background: 'rgba(19,17,15,.5)', borderColor: 'rgba(243,238,230,.3)' }}
+              style={zone === z ? undefined : { background: 'rgba(14,14,16,.5)', borderColor: 'rgba(255,255,255,.22)', color: '#fff' }}
             >
               {z ?? 'Para ti'}
             </button>
@@ -140,33 +143,35 @@ function FeedCard({
       </div>
 
       <div className="feed-rail">
-        <button className="icon-btn glass" style={{ width: 48, height: 48, borderRadius: 24 }} aria-label={saved ? 'Quitar de guardados' : 'Guardar plato'} aria-pressed={saved} onClick={() => { toggleSaved(item.dish.id); toast(saved ? 'Quitado de guardados' : 'Guardado en tu perfil'); }}>
+        <button className="icon-btn glass" aria-label={saved ? 'Quitar de guardados' : 'Guardar plato'} aria-pressed={saved} onClick={() => { toggleSaved(item.dish.id); toast(saved ? 'Quitado de guardados' : 'Guardado en tu perfil'); }} style={saved ? { color: 'var(--brand)' } : undefined}>
           <Icon name={saved ? 'bookmarkFill' : 'bookmark'} />
         </button>
-        <button className="icon-btn glass" style={{ width: 48, height: 48, borderRadius: 24 }} aria-label="Compartir" onClick={share}>
+        <button className="icon-btn glass" aria-label="Compartir" onClick={share}>
           <Icon name="share" />
         </button>
-        <button className="icon-btn glass" style={{ width: 48, height: 48, borderRadius: 24 }} aria-label={muted ? 'Activar sonido' : 'Silenciar'} onClick={() => setMuted(!muted)}>
+        <button className="icon-btn glass" aria-label={muted ? 'Activar sonido' : 'Silenciar'} onClick={() => setMuted(!muted)}>
           <Icon name={muted ? 'muted' : 'sound'} />
         </button>
       </div>
 
-      <div className="feed-ticket">
-        <div className="row between gap-8 mono" style={{ fontSize: 11, letterSpacing: 0.8, color: 'var(--tinta)' }}>
-          <span className="ellipsis">{item.restaurant.name.toUpperCase()} · {item.restaurant.zone.toUpperCase()}</span>
-          <span className="row gap-4" style={{ color: 'var(--carbon)', fontWeight: 500, flex: 'none' }}>
-            <span style={{ color: 'var(--brasa-texto)', display: 'flex' }}><Icon name="starFill" size={13} /></span>
+      <div className="feed-info">
+        <h2 className="dish">{item.dish.name}</h2>
+        <div className="row gap-8">
+          <span className="avatar" aria-hidden="true">{initials(item.restaurant.name)}</span>
+          <span className="small ellipsis" style={{ fontWeight: 500 }}>{item.restaurant.name}</span>
+          <span style={{ color: 'var(--brand)', display: 'flex' }}><Icon name="verified" size={15} /></span>
+          <span className="small muted" style={{ flex: 'none' }}>· {item.restaurant.zone}</span>
+        </div>
+        <span className="small clamp-2" style={{ color: 'var(--text-2)', lineHeight: 1.5 }}>{item.dish.description}</span>
+        <div className="row between">
+          <span className="price" style={{ fontSize: 22 }}>{formatCop(item.dish.priceCop)}</span>
+          <span className="row gap-4 small" style={{ fontWeight: 600 }}>
+            <span style={{ color: 'var(--brand)', display: 'flex' }}><Icon name="starFill" size={15} /></span>
             {rating.average !== null ? `${formatRating(rating.average)} (${rating.count})` : `Nuevo · ${rating.count}`}
           </span>
         </div>
-        <h2 className="dish">{item.dish.name}</h2>
-        <div className="row gap-10" style={{ alignItems: 'baseline' }}>
-          <span className="price" style={{ fontSize: 20 }}>{formatCop(item.dish.priceCop)}</span>
-          <span className="small clamp-2" style={{ color: 'var(--tinta)' }}>{item.dish.description}</span>
-        </div>
-        <Perforation />
-        <div className="row gap-10">
-          <button className="btn btn-ghost grow" style={{ borderColor: 'var(--carbon)' }} onClick={() => nav.push({ name: 'restaurant', id: item.restaurant.id })}>
+        <div className="row gap-10" style={{ marginTop: 4 }}>
+          <button className="btn btn-ghost grow" onClick={() => nav.push({ name: 'restaurant', id: item.restaurant.id })}>
             Ver menú
           </button>
           <button className="btn btn-primary" style={{ flex: 1.4 }} onClick={() => nav.push({ name: 'reserve', restaurantId: item.restaurant.id })}>
@@ -176,4 +181,8 @@ function FeedCard({
       </div>
     </section>
   );
+}
+
+export function initials(name: string): string {
+  return name.split(/\s+/).filter((w) => w.length > 2 || /^[A-ZÁÉÍÓÚ]/.test(w)).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
 }

@@ -38,7 +38,7 @@ export function DishEditor({ dishId, categoryId }: { dishId?: string; categoryId
 
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column' }}>
-      <Header onBack={nav.back} title={id ? 'Editar plato' : 'Nuevo plato'} right={<button className="btn btn-dark btn-sm" onClick={save}>Guardar</button>} />
+      <Header onBack={nav.back} title={id ? 'Editar plato' : 'Nuevo plato'} right={<button className="btn btn-primary btn-sm" onClick={save}>Guardar</button>} />
       <div className="stack gap-20" style={{ padding: '4px 16px 28px', gap: 20 }}>
         {id && dish ? <VideoSection dishId={id} /> : (
           <div className="card row gap-12" style={{ alignItems: 'flex-start' }}>
@@ -90,7 +90,7 @@ export function DishEditor({ dishId, categoryId }: { dishId?: string; categoryId
             <span className="small muted">Desaparece del menú y del feed. No se puede deshacer.</span>
             <div className="row gap-8">
               <button className="btn btn-ghost btn-sm grow" onClick={() => setConfirmDelete(false)}>Cancelar</button>
-              <button className="btn btn-sm grow" style={{ background: 'var(--alerta)', color: 'var(--hueso)' }} onClick={() => { deleteDish(id); toast('Plato eliminado'); nav.back(); }}>Eliminar</button>
+              <button className="btn btn-sm grow" style={{ background: 'var(--bad-strong)', color: '#fff' }} onClick={() => { deleteDish(id); toast('Plato eliminado'); nav.back(); }}>Eliminar</button>
             </div>
           </div>
         )}
@@ -213,7 +213,7 @@ function VideoSection({ dishId }: { dishId: string }) {
       </div>
 
       {picked && (
-        <div className="stack gap-12 enter" style={{ background: 'var(--carbon)', color: 'var(--hueso)', borderRadius: 16, padding: 16 }}>
+        <div className="stack gap-12 enter" style={{ background: 'var(--surface-2)', color: 'var(--text)', borderRadius: 18, padding: 16, border: '1px solid var(--line-strong)' }}>
           <div className="row between">
             <span className="bold">{picked.duration > RULES.videoMaxSeconds ? 'Elige tus 10 segundos' : 'Tu video'}</span>
             <span className="mono tiny" style={{ color: 'var(--humo)' }}>CLIP {formatSeconds(picked.duration)} · {picked.width}×{picked.height}</span>
@@ -227,7 +227,7 @@ function VideoSection({ dishId }: { dishId: string }) {
           {errors.map((i) => <span key={i.code} className="small" style={{ color: '#ffb79e' }}>✕ {i.message}</span>)}
           {warnings.map((i) => <span key={i.code} className="small" style={{ color: 'var(--humo)' }}>• {i.message}</span>)}
           <div className="row gap-8">
-            <button className="btn btn-ghost btn-sm grow" style={{ borderColor: 'var(--carbon-line)', color: 'var(--hueso)' }} onClick={() => setPicked(null)}>Descartar</button>
+            <button className="btn btn-ghost btn-sm grow" style={{ borderColor: 'var(--line-strong)', color: 'var(--text)' }} onClick={() => setPicked(null)}>Descartar</button>
             <button className="btn btn-primary btn-sm" style={{ flex: 1.5 }} disabled={errors.length > 0} onClick={upload}>
               Enviar {formatSeconds(length)} a revisión
             </button>

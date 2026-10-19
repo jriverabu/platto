@@ -2,7 +2,7 @@
 
 **Descubre restaurantes por sus platos en video de 10 segundos, reserva en dos toques y califica solo si fuiste.**
 
-Platto es un marketplace para Colombia (piloto en Bogotá): los comensales ven cada plato en video vertical, reservan mesa y dejan calificaciones verificadas; los restaurantes pagan una suscripción mensual para aparecer, gestionar su menú y recibir reservas.
+Platto es un marketplace para Colombia (piloto en Cúcuta): los comensales ven cada plato en video vertical, reservan mesa y dejan calificaciones verificadas; los restaurantes pagan una suscripción mensual para aparecer, gestionar su menú y recibir reservas.
 
 ## Estado del proyecto
 
@@ -40,7 +40,7 @@ packages/core/        Reglas del negocio y marca, sin dependencias, compartidas 
 supabase/
   migrations/         Esquema, seguridad (RLS) y funciones de negocio
   functions/          Edge Functions (Deno): video, pagos, notificaciones
-  seed.sql            Tres restaurantes de ejemplo en Bogotá
+  seed.sql            Tres restaurantes de ejemplo en Cúcuta
   tests/              Pruebas de la base de datos
 docs/                 Arquitectura, reglas y configuración de cuentas
 scripts/test-db.sh    Corre las pruebas de base de datos en un Postgres limpio
