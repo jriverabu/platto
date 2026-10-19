@@ -29,7 +29,7 @@ Califica (2 h a 14 días)   ─────▶  Ve la reseña y responde una vez
                                    Paga suscripción (Mercado Pago) ──────────▶ Activa / suspende
 ```
 
-Detalle técnico en [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md). Todas las cifras de las reglas están en [`docs/REGLAS.md`](docs/REGLAS.md).
+Detalle técnico en [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md). Lo decidido para el lanzamiento oficial (videos, costos y topes) está en [`docs/LANZAMIENTO.md`](docs/LANZAMIENTO.md). Todas las cifras de las reglas están en [`docs/REGLAS.md`](docs/REGLAS.md).
 
 ## Estructura
 
