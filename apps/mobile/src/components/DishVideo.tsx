@@ -8,6 +8,19 @@ import { RULES } from '@platto/core';
 import type { VideoFile } from '@platto/demo';
 import { videoSource } from '@/lib/videos';
 
+/**
+ * Llama al reproductor sin romper la app si ya fue liberado.
+ * Al salir de pantalla, expo-video libera el reproductor nativo antes de que corra
+ * la limpieza de este componente; en iOS, tocarlo entonces lanza NotFoundException.
+ */
+function safe(fn: () => void) {
+  try {
+    fn();
+  } catch {
+    // El reproductor ya no existe: no hay nada que pausar ni mover.
+  }
+}
+
 interface Props {
   video: VideoFile;
   active: boolean;
@@ -27,20 +40,24 @@ export function DishVideo({ video, active, muted = true, style, onProgress, onWa
   const watched = useRef(0);
 
   useEffect(() => {
-    player.muted = muted;
+    safe(() => {
+      player.muted = muted;
+    });
   }, [player, muted]);
 
   useEffect(() => {
     if (active) {
-      player.currentTime = video.trimStart;
-      player.play();
+      safe(() => {
+        player.currentTime = video.trimStart;
+        player.play();
+      });
       watched.current = 0;
       return () => {
-        player.pause();
+        safe(() => player.pause());
         if (watched.current > 0) onWatched?.(Math.min(length, watched.current));
       };
     }
-    player.pause();
+    safe(() => player.pause());
     return undefined;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active, player]);
@@ -48,7 +65,11 @@ export function DishVideo({ video, active, muted = true, style, onProgress, onWa
   useEventListener(player, 'timeUpdate', ({ currentTime }) => {
     const t = Math.max(0, currentTime - video.trimStart);
     // El recorte de 10 s: si el archivo es más largo, vuelve al inicio de la ventana.
-    if (t > length) player.currentTime = video.trimStart;
+    if (t > length) {
+      safe(() => {
+        player.currentTime = video.trimStart;
+      });
+    }
     watched.current = Math.max(watched.current, Math.min(length, t));
     onProgress?.(Math.min(1, t / length));
   });
