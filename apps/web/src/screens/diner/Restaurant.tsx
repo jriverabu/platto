@@ -4,9 +4,10 @@ import { featured, livePromotions, now, ratingOf, reportReview, slotsFor, useDem
 import type { DishRow } from '../../data/model';
 import { useNav } from '../../nav';
 import { DishVideo } from '../../components/Video';
-import { Icon, Sheet, Stars, attempt } from '../../components/ui';
+import { Icon, Stars, attempt } from '../../components/ui';
 import { initials } from './Feed';
 import { PromoCard } from '../../components/Promo';
+import { DishViewer } from '../../components/DishViewer';
 
 type Tab = 'menu' | 'reviews' | 'info';
 const WEEKDAYS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -35,11 +36,12 @@ export function RestaurantScreen({ id }: { id: string }) {
   const next = slotsFor(s, id, today, 2).find((x) => x.available);
   const rules = s.rules.filter((r) => r.restaurantId === id);
   const promos = livePromotions(s, id);
+  const withVideo = dishes.filter((d) => d.video);
 
   return (
     <div className="screen" style={{ display: 'flex', flexDirection: 'column' }}>
       <div className="hero">
-        {cover && <DishVideo video={cover} active className="" label={`Video de portada de ${restaurant.name}`} />}
+        {cover && <DishVideo video={cover} active={!openDish} className="" label={`Video de portada de ${restaurant.name}`} />}
         <div className="hero-bar">
           <button className="icon-btn glass" onClick={nav.back} aria-label="Volver"><Icon name="back" /></button>
           <span style={{ alignSelf: 'center', fontSize: 11, fontWeight: 600, letterSpacing: 1, padding: '6px 10px', borderRadius: 999, background: 'rgba(14,14,16,.6)' }}>PORTADA · 10 S</span>
@@ -177,19 +179,14 @@ export function RestaurantScreen({ id }: { id: string }) {
         )}
       </div>
 
-      {openDish && openDish.video && (
-        <Sheet onClose={() => setOpenDish(null)} label={openDish.name} night>
-          <div style={{ borderRadius: 18, overflow: 'hidden', aspectRatio: '9 / 16', maxHeight: '52vh', alignSelf: 'center', background: '#000' }}>
-            <DishVideo video={openDish.video} active className="fill" label={`Video de ${openDish.name}`} />
-          </div>
-          <div className="stack gap-6">
-            <span className="display h2">{openDish.name}</span>
-            <span className="small" style={{ color: 'var(--text-2)' }}>{restaurant.name}</span>
-            <span className="small" style={{ color: 'var(--text-3)', lineHeight: 1.5 }}>{openDish.description}</span>
-            <span className="price" style={{ fontSize: 20 }}>{formatCop(openDish.priceCop)}</span>
-          </div>
-          <button className="btn btn-primary btn-block" onClick={() => { setOpenDish(null); nav.push({ name: 'reserve', restaurantId: id }); }}>Reservar para probarlo</button>
-        </Sheet>
+      {openDish && (
+        <DishViewer
+          dishes={withVideo}
+          startIndex={Math.max(0, withVideo.findIndex((d) => d.id === openDish.id))}
+          restaurant={restaurant}
+          onClose={() => setOpenDish(null)}
+          onReserve={() => { setOpenDish(null); nav.push({ name: 'reserve', restaurantId: id }); }}
+        />
       )}
     </div>
   );

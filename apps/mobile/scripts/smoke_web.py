@@ -90,6 +90,13 @@ def STEPS(page, shot, base):  # noqa: N802
     page.wait_for_timeout(1200)
     expect(page.get_by_text("Postre gratis en mesas de 4")).to_be_visible()
     shot("06-restaurante")
+    # Un plato del menú se abre a pantalla completa.
+    btn("Costilla ahumada 12 horas").click()
+    page.wait_for_timeout(1500)
+    expect(page.get_by_text("Reservar para probarlo").first).to_be_visible()
+    shot("06b-plato-pantalla-completa")
+    btn("Cerrar").click()
+    page.wait_for_timeout(800)
     page.get_by_role("button", name="Reservar mesa").first.click()
     page.wait_for_timeout(800)
     page.locator("[role=button][aria-label]").filter(has_text="DOM").or_(page.locator("[role=button][aria-label]").filter(has_text="LUN")).first.click()

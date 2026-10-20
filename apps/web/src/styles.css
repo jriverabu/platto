@@ -343,3 +343,8 @@ a { color: inherit; }
 .days { display: flex; gap: 6px; }
 .days button { flex: 1; min-height: 44px; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text-2); font-weight: 600; font-size: 13px; }
 .days button[aria-pressed='true'] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+
+/* ---------- Plato a pantalla completa ---------- */
+.dish-viewer { position: absolute; inset: 0; z-index: 60; background: #000; display: flex; flex-direction: column; animation: up .22s cubic-bezier(.2,.9,.3,1); }
+.dish-viewer .feed { height: 100%; }
+.dish-viewer .feed-info { bottom: calc(16px + var(--safe-bottom)); }

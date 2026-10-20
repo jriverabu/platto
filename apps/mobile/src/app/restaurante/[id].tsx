@@ -9,7 +9,8 @@ import { formatClock12, formatCop, formatPriceLevel, formatRating, localParts } 
 import { featured, livePromotions, now, ratingOf, reportReview, slotsFor, useDemo, type DishRow } from '@platto/demo';
 import { DishVideo } from '@/components/DishVideo';
 import { PromoCard } from '@/components/PromoCard';
-import { Badge, Button, Chip, Icon, IconButton, Row, Sheet, Stars, T, attempt } from '@/components/ui';
+import { DishViewer } from '@/components/DishViewer';
+import { Badge, Button, Chip, Icon, IconButton, Row, Stars, T, attempt } from '@/components/ui';
 import { initials } from '@/lib/format';
 import { posterSource } from '@/lib/videos';
 import { C } from '@/lib/theme';
@@ -38,13 +39,14 @@ export default function RestaurantScreen() {
   const next = slotsFor(s, restaurant.id, today, 2).find((x) => x.available);
   const rules = s.rules.filter((r) => r.restaurantId === id);
   const promos = livePromotions(s, restaurant.id);
+  const withVideo = dishes.filter((d) => d.video);
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 28 }}>
         <View style={{ height: 300, backgroundColor: '#000' }}>
           {cover?.poster && <Image source={posterSource(cover.poster)} style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }} contentFit="cover" />}
-          {cover && <DishVideo video={cover} active />}
+          {cover && <DishVideo video={cover} active={!openDish} />}
           <LinearGradient colors={['transparent', C.bg]} style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 180 }} pointerEvents="none" />
           <Row style={{ position: 'absolute', left: 16, right: 16, top: insets.top + 8, justifyContent: 'space-between' }}>
             <IconButton icon="back" label="Volver" glass onPress={() => router.back()} />
@@ -191,23 +193,15 @@ export default function RestaurantScreen() {
         </View>
       </ScrollView>
 
-      <Sheet visible={!!openDish} onClose={() => setOpenDish(null)} label={openDish?.name ?? 'Plato'}>
-        {openDish?.video && (
-          <>
-            <View style={{ alignSelf: 'center', height: 360, aspectRatio: 9 / 16, borderRadius: 18, overflow: 'hidden', backgroundColor: '#000' }}>
-              {openDish.video.poster && <Image source={posterSource(openDish.video.poster)} style={{ width: '100%', height: '100%' }} contentFit="cover" />}
-              <DishVideo video={openDish.video} active />
-            </View>
-            <View style={{ gap: 4 }}>
-              <T size="h2" weight="bold">{openDish.name}</T>
-              <T size="small" color={C.text2}>{restaurant.name}</T>
-              <T size="small" color={C.text3}>{openDish.description}</T>
-              <T size="h3" weight="bold">{formatCop(openDish.priceCop)}</T>
-            </View>
-            <Button title="Reservar para probarlo" onPress={() => { setOpenDish(null); router.push(`/reservar/${restaurant.id}`); }} />
-          </>
-        )}
-      </Sheet>
+      {openDish && (
+        <DishViewer
+          dishes={withVideo}
+          startIndex={Math.max(0, withVideo.findIndex((d) => d.id === openDish.id))}
+          restaurant={restaurant}
+          onClose={() => setOpenDish(null)}
+          onReserve={() => { setOpenDish(null); router.push(`/reservar/${restaurant.id}`); }}
+        />
+      )}
     </View>
   );
 }

@@ -75,6 +75,13 @@ def main() -> None:
         page.locator(".screen").first.evaluate("el => el.scrollTo(0, 900)")
         page.wait_for_timeout(400)
         shot("04-restaurante-menu")
+        # Un plato del menú se abre a pantalla completa y se cierra con la X.
+        page.locator(".dish-row", has_text="Costilla ahumada 12 horas").click()
+        expect(page.get_by_role("dialog", name="Platos de Brasa Negra")).to_be_visible()
+        page.wait_for_timeout(800)
+        shot("04b-plato-pantalla-completa")
+        page.get_by_role("button", name="Cerrar").click()
+        expect(page.get_by_role("dialog", name="Platos de Brasa Negra")).to_have_count(0)
         page.get_by_role("button", name="Reservar mesa").last.click()
         page.wait_for_timeout(500)
         page.locator(".day").nth(1).click()
