@@ -1,10 +1,12 @@
-// Datos de demostración: cuatro restaurantes de Cúcuta con menú en video,
-// reservas en distintos estados y reseñas verificadas. Todo es de ejemplo.
+// Datos de demostración: cuatro restaurantes de ejemplo en Cúcuta con menú en video,
+// reservas en distintos estados y reseñas verificadas, más Tadeo Chocolatería,
+// la primera marca real (con su menú y sus videos, sin reseñas ni reservas inventadas).
 import { addCalendarDays, localParts, zonedToUtc, type AvailabilityRule } from '@platto/core';
 import type { DemoState, DishRow, ReservationRow, ReviewRow, ViewRow } from './model';
+import { tadeoBrand } from './brands/tadeo';
 
 export const TZ = 'America/Bogota';
-export const DEMO_VERSION = 6;
+export const DEMO_VERSION = 7;
 
 const MIN = 60_000;
 
@@ -119,6 +121,14 @@ export function buildSeed(nowMs: number): DemoState {
       rules.push({ id: `${restaurantId}-${weekday}-c`, restaurantId, weekday, startTime: '18:30', endTime: '22:00', slotMinutes: 30, capacityPeople: capacities[restaurantId]! });
     }
   }
+
+  // Tadeo Chocolatería (marca real, plan Pro de prueba).
+  const tadeo = tadeoBrand(TZ, nowMs + month);
+  restaurants.push(tadeo.restaurant);
+  subscriptions.push(tadeo.subscription);
+  categories.push(...tadeo.categories);
+  dishes.push(...tadeo.dishes);
+  rules.push(...tadeo.rules);
 
   const reservations: ReservationRow[] = [];
   const reviews: ReviewRow[] = [];

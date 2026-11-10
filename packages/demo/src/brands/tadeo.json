@@ -1,0 +1,677 @@
+{
+  "_fuente": "Menú en PDF de Tadeo Chocolatería y su Instagram @tadeochocolateria (noviembre de 2026). Precios en COP.",
+  "restaurant": {
+    "id": "r-tadeo",
+    "uuid": "55555555-5555-4555-8555-555555555555",
+    "slug": "tadeo-chocolateria",
+    "name": "Tadeo Chocolatería",
+    "cuisine": "Chocolatería",
+    "zone": "Colsag",
+    "address": "Calle 8 con Av. 10E, Local 03",
+    "lat": 7.8925,
+    "lng": -72.4895,
+    "priceLevel": 2,
+    "description": "Chocolatería real en Colsag: bombones artesanales, la torta Matilda, croissants, desayunos y café.",
+    "coverDishId": "d-tadeo-matilda",
+    "plan": "pro",
+    "capacity": 24,
+    "hours": [
+      {
+        "start": "07:45",
+        "end": "11:45"
+      },
+      {
+        "start": "14:30",
+        "end": "19:00"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "c-tadeo-postres",
+      "name": "Postres y bombones",
+      "dishes": [
+        {
+          "id": "d-tadeo-matilda",
+          "name": "Torta chocolate Matilda",
+          "description": "La torta de chocolate que tiene a todos antojados.",
+          "price": 16900,
+          "tags": [
+            "Favorito de la casa"
+          ],
+          "video": "tadeo-torta-matilda"
+        },
+        {
+          "id": "d-tadeo-bombones-6",
+          "name": "Caja de bombones x6",
+          "description": "Bombones artesanales de la casa. La edición del mes cambia de sabores.",
+          "price": 45000,
+          "tags": [
+            "Para regalar"
+          ],
+          "video": "tadeo-bombones"
+        },
+        {
+          "id": "d-tadeo-bombones-9",
+          "name": "Caja de bombones x9",
+          "description": "Bombones artesanales de la casa. La edición del mes cambia de sabores.",
+          "price": 65000,
+          "tags": [
+            "Para regalar"
+          ]
+        },
+        {
+          "id": "d-tadeo-cuchareable-matilda",
+          "name": "Cuchareable Matilda",
+          "description": "",
+          "price": 18900,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-cuchareables",
+          "name": "Cuchareables Tadeo",
+          "description": "",
+          "price": 18000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-galleta-helado",
+          "name": "Galleta con helado",
+          "description": "",
+          "price": 15000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-brownie-helado",
+          "name": "Brownie con helado",
+          "description": "",
+          "price": 15000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-caja-brownies",
+          "name": "Caja de brownies",
+          "description": "x3 unidades.",
+          "price": 38000,
+          "tags": [
+            "Para regalar"
+          ]
+        },
+        {
+          "id": "d-tadeo-tableta",
+          "name": "Tableta de chocolate rellena",
+          "description": "",
+          "price": 22000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-tostada-francesa",
+          "name": "Tostada francesa con crema de caramelo salado",
+          "description": "",
+          "price": 33000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-chocopistacho",
+          "name": "Torta chocopistacho",
+          "description": "",
+          "price": 22000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-chocogalleta",
+          "name": "Chocogalleta",
+          "description": "",
+          "price": 15000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-tarta-vasca",
+          "name": "Tarta vasca",
+          "description": "Colaboración Tadeo x Insignia.",
+          "price": 24000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-tarta-vasca-helado",
+          "name": "Tarta vasca con helado",
+          "description": "Colaboración Tadeo x Insignia.",
+          "price": 26000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-cafe",
+      "name": "Café, chocolate y té",
+      "dishes": [
+        {
+          "id": "d-tadeo-capuchino",
+          "name": "Capuchino",
+          "description": "Pídelo con un bombón de la casa.",
+          "price": 8500,
+          "tags": [],
+          "video": "tadeo-capuchino"
+        },
+        {
+          "id": "d-tadeo-espresso",
+          "name": "Espresso",
+          "description": "",
+          "price": 6000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-americano",
+          "name": "Americano",
+          "description": "",
+          "price": 6500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-machiatto",
+          "name": "Machiatto",
+          "description": "",
+          "price": 6500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-latte",
+          "name": "Latte",
+          "description": "",
+          "price": 8500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-ice-latte",
+          "name": "Ice latte",
+          "description": "",
+          "price": 12500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-chocolate",
+          "name": "Chocolate",
+          "description": "",
+          "price": 9500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-mocachino",
+          "name": "Mocachino",
+          "description": "",
+          "price": 8800,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-caramel-capuchino",
+          "name": "Caramel capuchino",
+          "description": "",
+          "price": 9500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-chai-frio",
+          "name": "Té chai frío",
+          "description": "",
+          "price": 20000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-chai-caliente",
+          "name": "Té chai caliente",
+          "description": "",
+          "price": 13500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-frapuccino",
+          "name": "Frapuccino",
+          "description": "",
+          "price": 16000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-milo",
+          "name": "Milo Tadeo",
+          "description": "",
+          "price": 17500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-migao",
+          "name": "Migao Tadeo",
+          "description": "Edición limitada.",
+          "price": 22000,
+          "tags": [
+            "Edición limitada"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-croissants",
+      "name": "Croissants",
+      "dishes": [
+        {
+          "id": "d-tadeo-croissant-jamon-queso",
+          "name": "Croissant de jamón y queso",
+          "description": "",
+          "price": 15000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-serrano",
+          "name": "Croissant de jamón serrano con huevo",
+          "description": "",
+          "price": 20000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-tocineta",
+          "name": "Croissant de tocineta con huevo",
+          "description": "",
+          "price": 18000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-chocolate",
+          "name": "Croissant de chocolate",
+          "description": "",
+          "price": 18000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-crema",
+          "name": "Croissant de crema pastelera",
+          "description": "",
+          "price": 16000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-ny",
+          "name": "Croissant New York roll",
+          "description": "",
+          "price": 16000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-pistacho",
+          "name": "Croissant de pistacho",
+          "description": "",
+          "price": 17000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-croissant-caramelo",
+          "name": "Croissant de caramelo salado",
+          "description": "",
+          "price": 18000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-desayunos",
+      "name": "Desayunos",
+      "dishes": [
+        {
+          "id": "d-tadeo-huevos-campesinos",
+          "name": "Huevos campesinos",
+          "description": "Huevo con maíz, queso, cilantro, hogao de la casa y tres arepitas.",
+          "price": 20000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-huevos-gusto",
+          "name": "Huevos al gusto",
+          "description": "Con arepa de la casa, queso asado y tocineta.",
+          "price": 22000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-omelette",
+          "name": "Huevos omelette",
+          "description": "Omelette relleno de jamón de pierna y queso, con 3 arepitas y hogao criollo.",
+          "price": 24000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-benedictinos",
+          "name": "Huevos benedictinos",
+          "description": "Huevos pochados sobre pan artesanal, bañados en salsa holandesa y jamón serrano.",
+          "price": 33000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-americano-desayuno",
+          "name": "Desayuno americano",
+          "description": "",
+          "price": 29000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-cacerola-ranchera",
+          "name": "Cacerola ranchera",
+          "description": "Colaboración con Vaca Nostra.",
+          "price": 35000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-cacerola-quesos",
+          "name": "Cacerola huevo 3 quesos",
+          "description": "",
+          "price": 30000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-pancakes-clasicos",
+          "name": "Pancakes clásicos",
+          "description": "Con miel.",
+          "price": 32000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-pancakes-chocolate",
+          "name": "Pancakes de chocolate",
+          "description": "",
+          "price": 33000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-entradas",
+      "name": "Entradas",
+      "dishes": [
+        {
+          "id": "d-tadeo-palito-queso",
+          "name": "Palito de queso",
+          "description": "",
+          "price": 8500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-papas",
+          "name": "Porción de papas",
+          "description": "Con queso y tocineta.",
+          "price": 14000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-queso-asado",
+          "name": "Queso asado",
+          "description": "Bañado en miel picante. x4 porciones.",
+          "price": 16000,
+          "tags": [
+            "Para compartir"
+          ]
+        },
+        {
+          "id": "d-tadeo-arepitas",
+          "name": "Arepitas de la casa",
+          "description": "x4 porciones: 2 arepitas de pollo y 2 de carne.",
+          "price": 25000,
+          "tags": [
+            "Para compartir"
+          ]
+        },
+        {
+          "id": "d-tadeo-nachos",
+          "name": "Nachos con carne",
+          "description": "",
+          "price": 33000,
+          "tags": [
+            "Para compartir"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-sandwiches",
+      "name": "Sándwiches",
+      "dishes": [
+        {
+          "id": "d-tadeo-sandwich-pollo",
+          "name": "Pollo + chips",
+          "description": "En pan artesanal con vegetales frescos, queso y salsa tártara de la casa.",
+          "price": 30000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-pulled-pork",
+          "name": "Pulled pork + chips",
+          "description": "Con pimentones encurtidos, queso, cebolla caramelizada, mermelada de tocineta, vegetales frescos y salsa de chipotle.",
+          "price": 32000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-sandwich-carne",
+          "name": "Carne + papas chips",
+          "description": "Con salsa de pimentón, cebolla caramelizada, vegetales frescos, queso y tocineta caramelizada.",
+          "price": 32000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-italianisimo",
+          "name": "Sándwich Italianísimo",
+          "description": "Colaboración con Adriano Ristorante Italiano.",
+          "price": 36000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-sandwich-jamon",
+          "name": "Sándwich de jamón premium y queso + chips",
+          "description": "",
+          "price": 25000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-hamburguesas",
+      "name": "Hamburguesas",
+      "dishes": [
+        {
+          "id": "d-tadeo-hamburguesa-clasica",
+          "name": "Hamburguesa clásica + papas chips",
+          "description": "Carne de 180 g, vegetales frescos, tártara artesanal, pepinillos encurtidos, tocineta y mix de quesos. Topping especial ChocoBaccon: mermelada de tocineta con chocolate.",
+          "price": 34000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-hamburguesa-deluxe",
+          "name": "Hamburguesa deluxe + papas chips",
+          "description": "Carne de 180 g, tomate, lechuga, cebolla en reducción balsámica, pepinillos encurtidos, tocineta y mix de quesos. Topping especial ChocoBaccon: mermelada de tocineta con chocolate.",
+          "price": 35000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-malteadas",
+      "name": "Malteadas",
+      "dishes": [
+        {
+          "id": "d-tadeo-malteada-red-velvet",
+          "name": "Malteada red velvet",
+          "description": "A base de nuestro brownie red velvet.",
+          "price": 20000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-malteada-blondie",
+          "name": "Malteada blondie",
+          "description": "A base de nuestro blondie de chocolate blanco.",
+          "price": 20000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-malteada-brownie",
+          "name": "Malteada brownie",
+          "description": "A base de nuestro brownie de chocolate oscuro al 70 %.",
+          "price": 22000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-jugos",
+      "name": "Jugos y frappés",
+      "dishes": [
+        {
+          "id": "d-tadeo-jugo-mandarina",
+          "name": "Mandarina · Sunset",
+          "description": "",
+          "price": 13000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-jugo-naranja",
+          "name": "Naranja · Orange vibes",
+          "description": "",
+          "price": 13000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-limonada",
+          "name": "Limonada · Lima limón",
+          "description": "",
+          "price": 13000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-limonada-coco",
+          "name": "Limonada de coco",
+          "description": "",
+          "price": 13000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-maracuya",
+          "name": "Maracuyá · En la playa",
+          "description": "",
+          "price": 13000,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "c-tadeo-bebidas",
+      "name": "Bebidas y sodas",
+      "dishes": [
+        {
+          "id": "d-tadeo-agua",
+          "name": "Agua Cristal",
+          "description": "",
+          "price": 4000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-cerezada",
+          "name": "Cerezada",
+          "description": "",
+          "price": 15000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-limonada-cafe",
+          "name": "Limonada de café",
+          "description": "Deliciosa y refrescante.",
+          "price": 13900,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-orange-coffee",
+          "name": "Orange coffee",
+          "description": "Jugo de naranja con espresso.",
+          "price": 13900,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-tinto-verano",
+          "name": "Tinto de verano",
+          "description": "",
+          "price": 23000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-sol",
+          "name": "Cerveza Sol",
+          "description": "",
+          "price": 6500,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-heineken",
+          "name": "Cerveza Heineken",
+          "description": "",
+          "price": 8000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-michelada",
+          "name": "Soda michelada",
+          "description": "Con soda Bretaña.",
+          "price": 13000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-frutos-rojos",
+          "name": "Soda frutos rojos",
+          "description": "Con soda Bretaña y mermelada de frutos rojos de la casa.",
+          "price": 16900,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-frutos-amarillos",
+          "name": "Soda frutos amarillos",
+          "description": "Con soda Bretaña y mermelada de frutos amarillos de la casa.",
+          "price": 16900,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-soda-verano",
+          "name": "Soda verano",
+          "description": "Con soda Bretaña.",
+          "price": 17000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-hatsu-rosado",
+          "name": "Té Hatsu rosado",
+          "description": "",
+          "price": 9000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-hatsu-blanco",
+          "name": "Té Hatsu blanco",
+          "description": "",
+          "price": 9000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-soda-rosa",
+          "name": "Soda de rosa Hatsu",
+          "description": "",
+          "price": 8000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-soda-limon",
+          "name": "Soda de limón y hierbabuena Hatsu",
+          "description": "",
+          "price": 8000,
+          "tags": []
+        },
+        {
+          "id": "d-tadeo-agua-hatsu",
+          "name": "Agua Hatsu",
+          "description": "",
+          "price": 6500,
+          "tags": []
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 # Prueba las migraciones de Supabase contra un Postgres limpio (15 o superior).
 # Usa las variables estándar de Postgres: PGHOST, PGPORT, PGUSER, PGPASSWORD.
 #   PGHOST=localhost PGPORT=5432 PGUSER=postgres bash scripts/test-db.sh
-# Crea una base temporal, aplica stub + migraciones + seed + pruebas, y la borra.
+# Crea una base temporal, aplica stub + migraciones + seed + pruebas + marcas reales, y la borra.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -23,5 +23,8 @@ run "$ROOT/supabase/tests/00_supabase_stub.sql"
 for f in "$ROOT"/supabase/migrations/*.sql; do run "$f"; done
 run "$ROOT/supabase/seed.sql"
 for f in "$ROOT"/supabase/tests/[1-9]*.test.sql; do run "$f"; done
+# Marcas reales: después de las pruebas, que cuentan solo los tres restaurantes de ejemplo.
+for f in "$ROOT"/supabase/seed_*.sql; do run "$f"; done
+run "$ROOT/supabase/tests/brands.check.sql"
 
 echo "✓ Base de datos: todas las pruebas pasaron"

@@ -68,7 +68,8 @@ def main() -> None:
         assert page.locator(".promo-pill").count() > 0, "Inicio muestra la promoción de Brasa Negra"
 
         # Comensal: ver el menú del primer plato y reservar.
-        page.get_by_role("button", name="Ver menú").first.click()
+        # El orden de Inicio cambia cada día: abre un plato de Brasa Negra (tiene promociones).
+        page.locator(".feed-item", has_text="Brasa Negra").first.get_by_role("button", name="Ver menú").click()
         page.wait_for_timeout(1200)
         expect(page.get_by_text("Postre gratis en mesas de 4")).to_be_visible()
         shot("03-restaurante")
@@ -193,6 +194,26 @@ def main() -> None:
         page.keyboard.press("Escape")
         page.wait_for_timeout(300)
         shot("21-promociones")
+
+        # Tadeo Chocolatería, la primera marca real: categoría, perfil, menú y plato a pantalla completa.
+        page.get_by_role("button", name="Abrir controles de la demo").click()
+        page.get_by_role("button", name="Comensal Camila").click()
+        page.get_by_role("button", name="Explorar", exact=True).click()
+        page.get_by_role("button", name="Chocolatería", exact=True).click()
+        expect(page.locator(".card", has_text="Tadeo Chocolatería")).to_have_count(1)
+        shot("22-tadeo-explorar")
+        page.locator(".card", has_text="Tadeo Chocolatería").click()
+        page.wait_for_timeout(1200)
+        expect(page.get_by_text("Calle 8 con Av. 10E", exact=False)).to_have_count(0)  # la dirección va en Información
+        shot("23-tadeo-perfil")
+        page.locator(".screen").first.evaluate("el => el.scrollTo(0, 700)")
+        page.wait_for_timeout(400)
+        shot("24-tadeo-menu")
+        page.locator(".dish-row", has_text="Torta chocolate Matilda").click()
+        expect(page.get_by_role("dialog", name="Platos de Tadeo Chocolatería")).to_be_visible()
+        page.wait_for_timeout(800)
+        shot("25-tadeo-matilda")
+        page.get_by_role("button", name="Cerrar").click()
 
         browser.close()
 

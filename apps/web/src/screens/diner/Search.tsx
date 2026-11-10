@@ -8,7 +8,7 @@ import { Empty, Icon, toast } from '../../components/ui';
 import { MapView } from '../../components/MapView';
 import { initials } from './Feed';
 
-const CUISINE_ICON: Record<string, string> = { Parrilla: 'flame', Típica: 'bowl', Colombiana: 'bowl', Mariscos: 'fish', Vegetariana: 'leaf' };
+const CUISINE_ICON: Record<string, string> = { Parrilla: 'flame', Típica: 'bowl', Colombiana: 'bowl', Mariscos: 'fish', Vegetariana: 'leaf', Chocolatería: 'cup', Postres: 'cup', Café: 'cup' };
 
 type Restaurant = DemoState['restaurants'][number];
 

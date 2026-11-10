@@ -38,13 +38,16 @@ apps/web/             PWA: la app completa en el navegador, instalable
 apps/mobile/          App Expo (iOS y Android)
 packages/core/        Reglas del negocio y marca, sin dependencias, compartidas por todo
 packages/demo/        Datos de ejemplo y backend de demostración, compartidos por la web y la app
+  src/brands/         Marcas reales del piloto: un JSON por marca con su menú (hoy, Tadeo Chocolatería)
 supabase/
   migrations/         Esquema, seguridad (RLS) y funciones de negocio
   functions/          Edge Functions (Deno): video, pagos, notificaciones
   seed.sql            Tres restaurantes de ejemplo en Cúcuta
+  seed_tadeo.sql      Tadeo Chocolatería, la primera marca real (generado desde su JSON)
   tests/              Pruebas de la base de datos
 docs/                 Arquitectura, reglas y configuración de cuentas
 scripts/test-db.sh    Corre las pruebas de base de datos en un Postgres limpio
+scripts/brand-to-sql.py  Convierte el JSON de una marca real en su seed de Supabase
 ```
 
 ## Probarlo

@@ -46,6 +46,7 @@ const PATHS: Record<string, ReactNode> = {
   tag: <><path d="M3 12V4h8l10 10-8 8z" /><circle cx="7.5" cy="8.5" r="1.5" fill="currentColor" /></>,
   map: <><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z" /><path d="M9 4v14" /><path d="M15 6v14" /></>,
   list: <><path d="M9 6h11" /><path d="M9 12h11" /><path d="M9 18h11" /><circle cx="4.5" cy="6" r="1" fill="currentColor" /><circle cx="4.5" cy="12" r="1" fill="currentColor" /><circle cx="4.5" cy="18" r="1" fill="currentColor" /></>,
+  cup: <><path d="M4 9h13v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z" /><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17" /><path d="M8 3.5c0 1 1 1.5 1 2.5" /><path d="M12 3.5c0 1 1 1.5 1 2.5" /></>,
   leaf: <><path d="M5 19C5 10 10 5 20 4c-.5 9-5 15-13 15z" /><path d="M5 19l8-8" /></>,
 };
 

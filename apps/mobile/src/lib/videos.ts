@@ -10,6 +10,10 @@ const FILES: Record<string, { video: number; poster: number }> = {
   'ceviche-pesca': { video: require('../../../web/public/videos/ceviche-pesca.mp4'), poster: require('../../../web/public/videos/ceviche-pesca.jpg') },
   'arroz-mariscos': { video: require('../../../web/public/videos/arroz-mariscos.mp4'), poster: require('../../../web/public/videos/arroz-mariscos.jpg') },
   'bowl-quinua': { video: require('../../../web/public/videos/bowl-quinua.mp4'), poster: require('../../../web/public/videos/bowl-quinua.jpg') },
+  // Tadeo Chocolatería: recortes de sus propios reels de Instagram.
+  'tadeo-torta-matilda': { video: require('../../../web/public/videos/tadeo-torta-matilda.mp4'), poster: require('../../../web/public/videos/tadeo-torta-matilda.jpg') },
+  'tadeo-bombones': { video: require('../../../web/public/videos/tadeo-bombones.mp4'), poster: require('../../../web/public/videos/tadeo-bombones.jpg') },
+  'tadeo-capuchino': { video: require('../../../web/public/videos/tadeo-capuchino.mp4'), poster: require('../../../web/public/videos/tadeo-capuchino.jpg') },
 };
 
 function slugOf(src: string) {

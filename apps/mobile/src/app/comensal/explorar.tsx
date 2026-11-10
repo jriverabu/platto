@@ -11,7 +11,7 @@ import { requestLocation, useLocation } from '@/lib/location';
 import { initials } from '@/lib/format';
 import { C, F } from '@/lib/theme';
 
-const CUISINE_ICON: Record<string, string> = { Parrilla: 'flame', Típica: 'bowl', Colombiana: 'bowl', Mariscos: 'fish', Vegetariana: 'leaf' };
+const CUISINE_ICON: Record<string, string> = { Parrilla: 'flame', Típica: 'bowl', Colombiana: 'bowl', Mariscos: 'fish', Vegetariana: 'leaf', Chocolatería: 'cup', Postres: 'cup', Café: 'cup' };
 type Restaurant = DemoState['restaurants'][number];
 
 export default function Explore() {
